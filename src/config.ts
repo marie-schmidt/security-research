@@ -2,8 +2,8 @@ export const SITE = {
   title: "Marie Schmidt",
   tagline: "Web and Cloud Security Research",
   description: "A minimal, responsive Astro theme for technical writing",
-  url: "https://marie-schmidt.github.io/security-research", // Update this to your site URL
-  baseurl: "/security-research",
+  url: "https://marieschmidt.me", // Update this to your site URL
+  baseurl: "",
   lang: "en",
   timezone: "Americas/Vancouver",
   cdn: "",
