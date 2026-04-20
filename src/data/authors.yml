@@ -5,18 +5,12 @@
 #   twitter: {twitter_of_author}
 #   url: {homepage_of_author}
 # -------------------------------------
-
-geocine:
-  name: Geocine
-  url: https://github.com/geocine/
+marie:
+  name: Marie Schmidt
+  url: https://github.com/marie-schmidt
 
 # Original Chirpy Theme Author
-cotes:
-  name: Cotes Chung
-  twitter: cotes2020
-  url: https://github.com/cotes2020/
-
-sille_bille:
-  name: Dinesh Prasanth Moluguwan Krishnamoorthy
-  twitter: dinesh_MKD
-  url: https://github.com/SilleBille/
+# cotes:
+#   name: Cotes Chung
+#   twitter: cotes2020
+#   url: https://github.com/cotes2020/

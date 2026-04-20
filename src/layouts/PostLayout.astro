@@ -5,6 +5,7 @@ import { SITE, SOCIAL } from '@/config';
 import { getAuthor } from '@/utils/authors';
 import fs from 'fs';
 import path from 'path';
+import yaml from 'js-yaml';
 
 export interface Props {
   post: CollectionEntry<'posts'>;
@@ -21,6 +22,16 @@ const authorData = author ? getAuthor(author) : null;
 const authorName = authorData?.name || author || SOCIAL.name || 'Author';
 const authorUrl = authorData?.url || (author ? `https://github.com/${author}/` : SOCIAL.links[0] || '#');
 
+// Load share platforms from share.yml
+let sharePlatforms: Array<{ type: string; icon: string; link: string }> = [];
+try {
+  const sharePath = path.join(process.cwd(), 'src/data/share.yml');
+  const shareData = yaml.load(fs.readFileSync(sharePath, 'utf8')) as any;
+  sharePlatforms = shareData?.platforms || [];
+} catch (e) {
+  console.warn('Could not load share.yml:', e);
+}
+
 // Format date using short month format (e.g., "Aug 9, 2019")
 const formattedDate = new Date(date).toLocaleDateString(SITE.lang, {
   year: 'numeric',
@@ -29,9 +40,9 @@ const formattedDate = new Date(date).toLocaleDateString(SITE.lang, {
 });
 
 // Calculate read time (rough estimate: 200 words per minute)
-const content = post.body;
-const words = content.trim().split(/\s+/).length;
-const readTime = Math.ceil(words / 200);
+const content = post.body || '';
+const words = content.trim() ? content.trim().split(/\s+/).length : 0;
+const readTime = Math.max(1, Math.ceil(words / 200));
 
 // Get the last modified date from file stats
 let updatedDate = date;
@@ -176,15 +187,17 @@ const getImageUrl = (path: string) => {
     <!-- Post Tail Wrapper -->
     <div class="post-tail-wrapper text-muted">
       <!-- Categories -->
-      <div class="post-meta mb-3">
-        <i class="far fa-folder-open fa-fw me-1"></i>
-        {categories && categories.length > 0 && categories.map((category, i) => (
-          <>
-            <a href={`/categories/${category}/`}>{category}</a>
-            {i < categories.length - 1 && ', '}
-          </>
-        ))}
-      </div>
+      {categories && categories.length > 0 && (
+        <div class="post-meta mb-3">
+          <i class="far fa-folder-open fa-fw me-1"></i>
+          {categories.map((category, i) => (
+            <>
+              <a href={`/categories/${category}/`}>{category}</a>
+              {i < categories.length - 1 && ', '}
+            </>
+          ))}
+        </div>
+      )}
 
       <!-- Tags -->
       {tags && tags.length > 0 && (
@@ -211,33 +224,22 @@ const getImageUrl = (path: string) => {
         <div class="share-wrapper d-flex align-items-center">
           <span class="share-label text-muted">Share</span>
           <span class="share-icons">
-            <a
-              href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(Astro.url.href)}`}
-              target="_blank"
-              rel="noopener"
-              data-bs-toggle="tooltip"
-              title="Twitter"
-            >
-              <i class="fa-fw fa-brands fa-x-twitter"></i>
-            </a>
-            <a
-              href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(Astro.url.href)}`}
-              target="_blank"
-              rel="noopener"
-              data-bs-toggle="tooltip"
-              title="Facebook"
-            >
-              <i class="fa-fw fab fa-facebook-square"></i>
-            </a>
-            <a
-              href={`https://telegram.me/share/url?url=${encodeURIComponent(Astro.url.href)}&text=${encodeURIComponent(title)}`}
-              target="_blank"
-              rel="noopener"
-              data-bs-toggle="tooltip"
-              title="Telegram"
-            >
-              <i class="fa-fw fab fa-telegram"></i>
-            </a>
+            {sharePlatforms.map((platform) => {
+              const shareUrl = platform.link
+                .replace(/TITLE/g, encodeURIComponent(title))
+                .replace(/URL/g, encodeURIComponent(Astro.url.href));
+              return (
+                <a
+                  href={shareUrl}
+                  target="_blank"
+                  rel="noopener"
+                  data-bs-toggle="tooltip"
+                  title={platform.type}
+                >
+                  <i class={`fa-fw ${platform.icon}`}></i>
+                </a>
+              );
+            })}
             <button
               id="copy-link"
               aria-label="Copy link"

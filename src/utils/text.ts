@@ -37,6 +37,7 @@ export function stripMarkdown(markdown: string): string {
  * Strips all markdown formatting and truncates at word boundary
  */
 export function getExcerpt(body: string, maxLength: number = 150): string {
+  if (!body) return '';
   const text = stripMarkdown(body);
 
   if (text.length <= maxLength) return text;

@@ -25,7 +25,7 @@ import postcssVendorFixes from "./plugins/postcss-vendor-fixes.mjs";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://example.com", // Update this to your site URL
+  site: "https://marie-schmidt.github.io", // Update this to your site URL
   integrations: [mdx(), sitemap()],
   markdown: {
     syntaxHighlight: "shiki",

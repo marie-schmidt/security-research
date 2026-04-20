@@ -5,42 +5,22 @@ icon: fas fa-info-circle
 order: 4
 ---
 
-A minimal, responsive, and feature-rich Astro theme for technical writing. Astro-Chirpy is an Astro port of the popular [Jekyll Chirpy theme](https://github.com/cotes2020/jekyll-theme-chirpy) created by [Cotes Chung](https://github.com/cotes2020).
+# Hi, I'm Marie 👋
 
-This implementation brings the beautiful Chirpy design to the Astro ecosystem, combining the elegant aesthetics of the original theme with Astro's modern architecture and performance benefits.
+I work in cybersecurity — currently on the defensive/architecture side, pivoting toward offensive security and web application assessment.
 
-## About This Port
+This site is my research notebook. I write up what I'm learning as I work through it: web application vulnerabilities, cloud attack surface, and the occasional tool I build to make testing faster. Everything here is independent work.
 
-Astro-Chirpy maintains the core design philosophy and features of the original Jekyll Chirpy theme while leveraging Astro's strengths:
+## What you'll find here
+- Web application security writeups
+- Cloud security notes (mostly Azure)
+- Custom tooling — Burp extensions, Nuclei templates, small utilities
+- Lab and CTF walkthroughs
 
-- **Blazing Fast Performance**: Built on Astro's islands architecture for optimal performance
-- **Modern Development Experience**: TypeScript, hot module replacement, and modern tooling
-- **Flexible Content Management**: Powered by Astro's content collections
-- **Enhanced Developer Experience**: Fast builds and instant feedback during development
+## About me
+Based in Vancouver, BC. Background in security consulting and cloud architecture, currently working toward OSCP and BSCP. Fluent in English, French, German.
 
-## Features
-
-- **Dark Mode**: Enhanced readability in low-light environments with seamless theme switching
-- **Syntax Highlighting**: Beautiful code blocks with multiple language support using Shiki
-- **Efficient Post Organization**: Hierarchical categories, trending tags, and powerful search functionality
-- **Optimized Layout**: Table of contents, syntax highlighting, prompts, and more
-- **Rich Writing Extensions**: Support for mathematical formulas (MathJax), diagrams (Mermaid), and embedded media
-- **Modern Web Technologies**: Built for SEO, web performance, and accessibility
-- **RSS Feed Support**: Keep your readers updated with RSS feeds
-- **Responsive Design**: Looks great on all devices and screen sizes
-
-## Technology Stack
-
-- **Framework**: [Astro](https://astro.build)
-- **Styling**: CSS with theme variables for easy customization
-- **Syntax Highlighting**: [Shiki](https://shiki.style/)
-- **Math Rendering**: [MathJax](https://www.mathjax.org/)
-- **Diagrams**: [Mermaid](https://mermaid.js.org/)
-- **Icons**: [Font Awesome](https://fontawesome.com/)
-
-## Getting Started
-
-Visit the [Getting Started](../posts/getting-started/) guide to learn how to set up your own Astro-Chirpy blog.
+Opinions are my own.
 
 ## Acknowledgments
 

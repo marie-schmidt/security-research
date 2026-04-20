@@ -11,7 +11,7 @@ const { lang = SITE.lang } = Astro.props;
 
 // Get tabs from content collection
 const tabs = await getCollection('tabs');
-const sortedTabs = tabs.sort((a, b) => a.data.order - b.data.order);
+const sortedTabs = tabs.filter((t) => !t.data.hidden).sort((a, b) => a.data.order - b.data.order);
 
 // Get avatar URL
 const getAvatarUrl = (src: string) => {

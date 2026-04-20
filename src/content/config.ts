@@ -33,6 +33,7 @@ const tabs = defineCollection({
     icon: z.string(),
     order: z.number(),
     layout: z.string().optional(),
+    hidden: z.boolean().optional(),
   }),
 });
 

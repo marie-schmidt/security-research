@@ -2,7 +2,8 @@
 export const CONTACT_LINKS = [
   {
     type: 'github',
-    icon: 'fab fa-github'
+    icon: 'fab fa-github',
+    // url: 'https://github.com/marie-schmidt'
   },
   {
     type: 'twitter',
@@ -10,19 +11,20 @@ export const CONTACT_LINKS = [
   },
   {
     type: 'email',
-    icon: 'fas fa-envelope'
+    icon: 'fas fa-envelope',
+    // url: 'mailto: marie.schmidt@email.com'
   },
   {
-    type: 'rss',
-    icon: 'fas fa-rss'
+  type: 'linkedin',
+  icon: 'fab fa-linkedin',
+  url: 'https://linkedin.com/in/marieplschmidt'
   }
 ];
 
 // You can add more social links here:
 // {
-//   type: 'linkedin',
-//   icon: 'fab fa-linkedin',
-//   url: 'https://linkedin.com/in/username'
+//   type: 'rss',
+//   icon: 'fas fa-rss'
 // },
 // {
 //   type: 'mastodon',

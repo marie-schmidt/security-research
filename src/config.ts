@@ -1,24 +1,24 @@
 export const SITE = {
-  title: "Chirpy",
-  tagline: "A text-focused Astro theme",
+  title: "Marie Schmidt",
+  tagline: "Web and Cloud Security Research",
   description: "A minimal, responsive Astro theme for technical writing",
-  url: "https://example.com", // Update this to your site URL
+  url: "https://marieschmidt.me", // Update this to your site URL
   baseurl: "",
   lang: "en",
-  timezone: "Asia/Shanghai",
-  cdn: "https://chirpy-img.netlify.app",
-  avatar: "/commons/avatar.jpg",
+  timezone: "Americas/Vancouver",
+  cdn: "",
+  avatar: "/commons/marie-purple-avatar.jpeg",
   social_preview_image: "",
   social: {
     name: "Geocine",
     email: "example@domain.com"
   },
   github: {
-    username: "github_username"
-  },
-  twitter: {
-    username: "twitter_username"
+    username: "marie-schmidt"
   }
+  // twitter: {
+  //   username: "twitter_username"
+  // }
 };
 
 export const SOCIAL = {
@@ -26,8 +26,8 @@ export const SOCIAL = {
   email: "example@domain.com",
   links: ["https://github.com/geocine", "https://twitter.com/geocine"],
   // Email obfuscation parts for spam protection
-  emailUser: "example",
-  emailDomain: "domain.com"
+  emailUser: "marie.schmidt",
+  emailDomain: "email.com"
 };
 
 export const GITHUB = {

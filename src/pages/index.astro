@@ -29,7 +29,8 @@ const getImageUrl = (post: any) => {
   const image = post.data.image;
   if (!image) return null;
 
-  const src = image.path || image;
+  const src = image.path || (typeof image === 'string' ? image : null);
+  if (!src) return null;
   if (src.startsWith('http://') || src.startsWith('https://')) return src;
   if (src.startsWith('/') && SITE.cdn) return `${SITE.cdn}${src}`;
   return src;

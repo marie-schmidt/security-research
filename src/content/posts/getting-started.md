@@ -9,6 +9,7 @@ categories: [Blogging, Tutorial]
 tags: [getting started]
 pin: true
 media_subpath: '/posts/20180809'
+hidden: true
 ---
 
 ## About Astro-Chirpy

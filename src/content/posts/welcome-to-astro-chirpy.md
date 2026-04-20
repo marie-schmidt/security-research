@@ -1,10 +1,12 @@
 ---
 title: Welcome to Astro Chirpy
 date: 2024-01-15T10:00:00+00:00
-categories: [Blogging, Tutorial]
-tags: [astro, chirpy, porting]
+author: marie
+categories: []
+tags: []
 description: A minimal, responsive and feature-rich Astro theme for technical writing, ported from Jekyll Chirpy.
 pin: true
+hidden: true
 ---
 
 ## Welcome
@@ -64,12 +66,14 @@ To create a new post, add a markdown file to `src/content/posts/` with the follo
 ---
 title: Your Post Title
 date: 2024-01-15T10:00:00+00:00
-categories: [Category1, Category2]
+author: marie
+categories: [TOP_CATEGORY, SUB_CATEGORY]
 tags: [tag1, tag2]
 description: Brief description of your post
 pin: false
 math: false
 mermaid: false
+hidden: false
 ---
 ```
 

@@ -2,9 +2,10 @@
 title: Writing a New Post
 author: geocine
 date: 2019-08-08T14:10:00+08:00
-categories: [Blogging, Tutorial]
-tags: [writing]
+categories: []
+tags: []
 render_with_liquid: false
+hidden: true
 ---
 
 This tutorial will guide you on how to write a post in Astro-Chirpy. Even if you're familiar with Astro, it's worth reading as many features require specific frontmatter variables to be set.
