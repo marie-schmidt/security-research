@@ -18,7 +18,7 @@ export async function GET(context: any) {
   const updated = latestPost ? latestPost.data.date.toISOString() : new Date().toISOString();
 
   // Build Atom feed XML
-  const feed = `<feed xmlns="http://www.w3.org/2005/Atom"> <id>${siteUrl}/</id><title>${SITE.title}</title><subtitle>${SITE.description}</subtitle> <updated>${updated}</updated> <author> <name>${SOCIAL.name}</name> <uri>${siteUrl}/</uri> </author><link rel="self" type="application/atom+xml" href="${siteUrl}/feed.xml"/><link rel="alternate" type="text/html" hreflang="${SITE.lang}" href="${siteUrl}/"/> <generator uri="https://astro.build/" version="5.0">Astro</generator> <rights> © ${new Date().getFullYear()} ${SOCIAL.name} </rights> <icon>/assets/img/favicons/favicon.ico</icon> <logo>/assets/img/favicons/favicon-96x96.png</logo>
+  const feed = `<feed xmlns="http://www.w3.org/2005/Atom"> <id>${siteUrl}/</id><title>${SITE.title}</title><subtitle>${SITE.description}</subtitle> <updated>${updated}</updated> <author> <name>${SOCIAL.name}</name> <uri>${siteUrl}/</uri> </author><link rel="self" type="application/atom+xml" href="${siteUrl}/feed.xml"/><link rel="alternate" type="text/html" hreflang="${SITE.lang}" href="${siteUrl}/"/> <generator uri="https://astro.build/" version="5.0">Astro</generator> <rights> © ${new Date().getFullYear()} ${SOCIAL.name} </rights> <icon>${siteUrl}/assets/img/favicons/favicon.ico</icon> <logo>${siteUrl}/assets/img/favicons/favicon-96x96.png</logo>
 ${sortedPosts.map((post) => {
   const postUrl = `${siteUrl}/posts/${post.slug}/`;
   const categories = post.data.categories || [];

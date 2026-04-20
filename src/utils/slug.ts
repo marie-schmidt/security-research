@@ -10,5 +10,5 @@ export function getCleanSlug(slug: string): string {
  * Generate post URL path without date prefix
  */
 export function getPostUrl(slug: string): string {
-  return `/posts/${getCleanSlug(slug)}/`;
+  return `${import.meta.env.BASE_URL}posts/${getCleanSlug(slug)}/`;
 }

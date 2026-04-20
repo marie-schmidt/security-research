@@ -19,7 +19,7 @@ const tags = await getAllTags();
         {
           tags.map(tag => (
             <div>
-              <a class="tag" href={`/tags/${tag.slug}/`}>
+              <a class="tag" href={`${import.meta.env.BASE_URL}tags/${tag.slug}/`}>
                 {tag.name}<span class="text-muted">{tag.count}</span>
               </a>
             </div>

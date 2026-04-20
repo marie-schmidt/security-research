@@ -33,7 +33,7 @@ const sortedCategories = Array.from(categories.entries()).sort((a, b) =>
             >
               <span class="ms-2">
                 <i class={`far fa-folder${hasSubCategories ? '-open' : ''} fa-fw`} />
-                <a href={`/categories/${slug}/`} class="mx-2">
+                <a href={`${import.meta.env.BASE_URL}categories/${slug}/`} class="mx-2">
                   {category.name}
                 </a>
                 <span class="text-muted small font-weight-light">
@@ -74,7 +74,7 @@ const sortedCategories = Array.from(categories.entries()).sort((a, b) =>
                     return (
                       <li class="list-group-item">
                         <i class="far fa-folder fa-fw" />
-                        <a href={`/categories/${slug}/${subSlug}/`} class="mx-2">
+                        <a href={`${import.meta.env.BASE_URL}categories/${slug}/${subSlug}/`} class="mx-2">
                           {subCategoryName}
                         </a>
                         <span class="text-muted small font-weight-light">

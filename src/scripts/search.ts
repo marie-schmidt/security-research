@@ -112,7 +112,7 @@ async function loadSearchData() {
   if (searchDataLoaded) return;
 
   try {
-    const response = await fetch('/search.json');
+    const response = await fetch(`${import.meta.env.BASE_URL}search.json`);
     if (!response.ok) {
       console.error('Failed to load search data');
       return;

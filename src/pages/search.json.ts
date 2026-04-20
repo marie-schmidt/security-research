@@ -51,7 +51,7 @@ export const GET: APIRoute = async () => {
 
     return {
       title: post.data.title,
-      url: `/posts/${post.slug}`,
+      url: `${import.meta.env.BASE_URL}posts/${post.slug}`,
       categories: post.data.categories?.join(', ') || '',
       tags: post.data.tags?.join(', ') || '',
       date: post.data.date.toISOString(),

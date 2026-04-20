@@ -22,7 +22,7 @@ const trendingTags = allTags
         <h2 class="panel-heading">Trending Tags</h2>
         <div class="d-flex flex-wrap mt-3 mb-1 me-3">
           {trendingTags.map(tag => (
-            <a href={`/tags/${tag.slug}`} class="post-tag btn btn-outline-primary">
+            <a href={`${import.meta.env.BASE_URL}tags/${tag.slug}`} class="post-tag btn btn-outline-primary">
               {tag.name}
             </a>
           ))}

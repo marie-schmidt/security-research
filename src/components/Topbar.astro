@@ -48,10 +48,16 @@ const SITE_TITLE = SITE.title || 'Chirpy';
     return (wrapper?.dataset?.siteTitle || 'Chirpy').trim();
   };
 
+  // Base path from Astro config (statically replaced by Vite at build time)
+  const BASE = import.meta.env.BASE_URL;
+
   // Generate breadcrumbs and topbar title
   const updateTopbar = () => {
     const siteTitle = getSiteTitle();
-    const path = window.location.pathname;
+    // Strip the base path prefix to get the route-relative path
+    const rawPath = window.location.pathname;
+    const baseNoTrailing = BASE.replace(/\/$/, '');
+    const path = baseNoTrailing ? rawPath.replace(new RegExp(`^${baseNoTrailing}`), '') || '/' : rawPath;
     const breadcrumb = document.getElementById('breadcrumb');
     const topbarTitle = document.getElementById('topbar-title');
 
@@ -76,7 +82,7 @@ const SITE_TITLE = SITE.title || 'Chirpy';
 
     // Always create home link for breadcrumb (when not on home page)
     const homeSpan = document.createElement('span');
-    homeSpan.innerHTML = '<a href="/">Home</a>';
+    homeSpan.innerHTML = `<a href="${BASE}">Home</a>`;
     breadcrumb.appendChild(homeSpan);
 
     // For blog posts (/posts/post-title), skip 'posts' and only show post title in breadcrumb
@@ -115,7 +121,7 @@ const SITE_TITLE = SITE.title || 'Chirpy';
         // Intermediate parts are links
         const link = document.createElement('a');
         const partIndex = parts.indexOf(part);
-        link.href = '/' + parts.slice(0, partIndex + 1).join('/');
+        link.href = BASE + parts.slice(0, partIndex + 1).join('/');
         link.textContent = formattedPart;
         span.appendChild(link);
       }

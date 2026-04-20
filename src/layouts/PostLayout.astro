@@ -192,7 +192,7 @@ const getImageUrl = (path: string) => {
           <i class="far fa-folder-open fa-fw me-1"></i>
           {categories.map((category, i) => (
             <>
-              <a href={`/categories/${category}/`}>{category}</a>
+              <a href={`${import.meta.env.BASE_URL}categories/${category}/`}>{category}</a>
               {i < categories.length - 1 && ', '}
             </>
           ))}
@@ -204,7 +204,7 @@ const getImageUrl = (path: string) => {
         <div class="post-tags">
           <i class="fa fa-tags fa-fw me-1"></i>
           {tags.map(tag => (
-            <a href={`/tags/${tag}/`} class="post-tag no-text-decoration">
+            <a href={`${import.meta.env.BASE_URL}tags/${tag}/`} class="post-tag no-text-decoration">
               {tag}
             </a>
           ))}
