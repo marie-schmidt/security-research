@@ -15,10 +15,10 @@ export const SITE = {
   },
   github: {
     username: "marie-schmidt"
+  },
+  twitter: {
+    username: ""
   }
-  // twitter: {
-  //   username: "twitter_username"
-  // }
 };
 
 export const SOCIAL = {
