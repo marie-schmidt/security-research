@@ -1,0 +1,172 @@
+{
+  "name": "astro-chirpy",
+  "version": "1.0.0",
+  "description": "A minimal, responsive, and feature-rich Astro theme for technical writing, ported from Jekyll Chirpy.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/geocine/astro-chirpy.git"
+  },
+  "author": "Cotes Chung",
+  "license": "MIT",
+  "since": 2019,
+  "bugs": {
+    "url": "https://github.com/geocine/astro-chirpy/issues"
+  },
+  "homepage": "https://github.com/geocine/astro-chirpy/",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "prebuild": "node scripts/generate-manifest.mjs",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "lint:js": "eslint src/**/*.{js,ts,astro}",
+    "lint:scss": "stylelint src/styles/**/*.scss",
+    "lint:fix:scss": "npm run lint:scss -- --fix",
+    "test": "npm run lint:js && npm run lint:scss"
+  },
+  "dependencies": {
+    "@popperjs/core": "^2.11.8",
+    "@types/js-yaml": "^4.0.9",
+    "bootstrap": "^5.3.8",
+    "flexsearch": "^0.8.212",
+    "js-yaml": "^4.1.0",
+    "markdown-it": "^14.1.0",
+    "remark-deflist": "^1.0.0",
+    "sanitize-html": "^2.17.0",
+    "tocbot": "^4.36.4"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.5",
+    "@astrojs/mdx": "^4.3.10",
+    "@astrojs/netlify": "^6.6.0",
+    "@astrojs/rss": "^4.0.13",
+    "@astrojs/sitemap": "^3.6.0",
+    "@babel/core": "^7.28.4",
+    "@babel/plugin-transform-class-properties": "^7.27.1",
+    "@babel/plugin-transform-private-methods": "^7.27.1",
+    "@babel/preset-env": "^7.28.3",
+    "@commitlint/cli": "^20.1.0",
+    "@commitlint/config-conventional": "^20.0.0",
+    "@rollup/plugin-babel": "^6.1.0",
+    "@rollup/plugin-node-resolve": "^16.0.3",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/exec": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
+    "@types/dompurify": "^3.0.5",
+    "@types/markdown-it": "^14.1.2",
+    "@types/sanitize-html": "^2.16.0",
+    "astro": "^5.15.4",
+    "concurrently": "^9.2.1",
+    "conventional-changelog-conventionalcommits": "^8.0.0",
+    "dompurify": "^3.3.0",
+    "eslint": "^9.38.0",
+    "globals": "^16.4.0",
+    "hastscript": "^9.0.1",
+    "husky": "^9.1.7",
+    "isomorphic-dompurify": "^2.31.0",
+    "jsdom": "^27.2.0",
+    "mermaid": "^11.12.1",
+    "purgecss": "^7.0.2",
+    "rollup": "^4.52.5",
+    "sass": "^1.93.3",
+    "semantic-release": "^24.2.0",
+    "stylelint": "^16.25.0",
+    "stylelint-config-standard-scss": "^16.0.0",
+    "typescript": "^5.9.3",
+    "unist-util-visit": "^5.0.0"
+  },
+  "prettier": {
+    "trailingComma": "none"
+  },
+  "browserslist": [
+    "last 2 versions",
+    "> 0.2%",
+    "not dead"
+  ],
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ],
+    "rules": {
+      "body-max-line-length": [
+        0,
+        "always"
+      ]
+    }
+  },
+  "release": {
+    "branches": [
+      "production"
+    ],
+    "plugins": [
+      [
+        "@semantic-release/commit-analyzer",
+        {
+          "preset": "conventionalcommits"
+        }
+      ],
+      [
+        "@semantic-release/release-notes-generator",
+        {
+          "preset": "conventionalcommits",
+          "presetConfig": {
+            "types": [
+              {
+                "type": "feat",
+                "section": "Features"
+              },
+              {
+                "type": "fix",
+                "section": "Bug Fixes"
+              },
+              {
+                "type": "perf",
+                "section": "Improvements"
+              },
+              {
+                "type": "refactor",
+                "section": "Changes",
+                "hidden": true
+              }
+            ]
+          }
+        }
+      ],
+      [
+        "@semantic-release/changelog",
+        {
+          "changelogFile": "docs/CHANGELOG.md",
+          "changelogTitle": "# Changelog"
+        }
+      ],
+      [
+        "@semantic-release/npm",
+        {
+          "npmPublish": false
+        }
+      ],
+      [
+        "@semantic-release/exec",
+        {
+          "prepareCmd": "bash tools/release.sh --prepare",
+          "publishCmd": "bash tools/release.sh"
+        }
+      ],
+      [
+        "@semantic-release/git",
+        {
+          "assets": [
+            "docs",
+            "package.json",
+            "*.gemspec"
+          ],
+          "message": "chore(release): ${nextRelease.version}\n\n${nextRelease.notes}"
+        }
+      ],
+      "@semantic-release/github"
+    ]
+  }
+}

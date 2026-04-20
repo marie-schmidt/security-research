@@ -1,0 +1,141 @@
+---
+import { SITE } from '@/config';
+
+export interface Props {
+  lang?: string;
+}
+
+const SITE_TITLE = SITE.title || 'Chirpy';
+---
+
+<header id="topbar-wrapper" class="flex-shrink-0" aria-label="Top Bar" data-site-title={SITE_TITLE}>
+  <div id="topbar" class="d-flex align-items-center justify-content-between px-lg-3 h-100">
+    <nav id="breadcrumb" aria-label="Breadcrumb">
+      <!-- Breadcrumb will be populated by JavaScript -->
+    </nav>
+
+    <button type="button" id="sidebar-trigger" class="btn btn-link" aria-label="Sidebar">
+      <i class="fas fa-bars fa-fw"></i>
+    </button>
+
+    <div id="topbar-title">
+      <!-- Page title will be populated by JavaScript -->
+    </div>
+
+    <button type="button" id="search-trigger" class="btn btn-link" aria-label="Search">
+      <i class="fas fa-search fa-fw"></i>
+    </button>
+
+    <search id="search" class="align-items-center ms-3 ms-lg-0">
+      <i class="fas fa-search fa-fw"></i>
+      <input
+        class="form-control"
+        id="search-input"
+        type="search"
+        aria-label="search"
+        autocomplete="off"
+        placeholder="Search..."
+      />
+    </search>
+
+    <button type="button" class="btn btn-link text-decoration-none" id="search-cancel">Cancel</button>
+  </div>
+</header>
+
+<script>
+  const getSiteTitle = () => {
+    const wrapper = document.getElementById('topbar-wrapper');
+    return (wrapper?.dataset?.siteTitle || 'Chirpy').trim();
+  };
+
+  // Generate breadcrumbs and topbar title
+  const updateTopbar = () => {
+    const siteTitle = getSiteTitle();
+    const path = window.location.pathname;
+    const breadcrumb = document.getElementById('breadcrumb');
+    const topbarTitle = document.getElementById('topbar-title');
+
+    if (!breadcrumb || !topbarTitle) return;
+
+    // Clear existing content
+    breadcrumb.innerHTML = '';
+    topbarTitle.textContent = '';
+
+    // Handle home page
+    if (path === '/' || path === '') {
+      const homeTitle = siteTitle || 'Home';
+      topbarTitle.textContent = homeTitle;
+      const homeSpan = document.createElement('span');
+      homeSpan.textContent = homeTitle;
+      breadcrumb.appendChild(homeSpan);
+      return;
+    }
+
+    // Split path and filter out empty strings
+    const parts = path.split('/').filter(part => part && part.trim() !== '');
+
+    // Always create home link for breadcrumb (when not on home page)
+    const homeSpan = document.createElement('span');
+    homeSpan.innerHTML = '<a href="/">Home</a>';
+    breadcrumb.appendChild(homeSpan);
+
+    // For blog posts (/posts/post-title), skip 'posts' and only show post title in breadcrumb
+    // This matches original Chirpy theme: Home > Post Title (not Home > Posts > Post Title)
+    // However, topbar-title should show "Post" not the post title
+    const isPostPage = parts.length > 0 && parts[0] === 'posts' && parts.length > 1;
+
+    let displayParts: string[] = [];
+    if (isPostPage) {
+      // For /posts/something, only show 'something' in breadcrumb
+      displayParts = [parts[1]];
+      // But set topbar-title to "Post"
+      topbarTitle.textContent = 'Post';
+    } else if (parts.length > 0 && parts[0] !== 'posts') {
+      // For other paths, show all parts
+      displayParts = parts;
+    }
+
+    // Add breadcrumb parts
+    // Note: CSS adds separators via ::after pseudo-element (see _topbar.scss)
+    displayParts.forEach((part, index) => {
+      // Format part: replace dashes with spaces and capitalize words
+      const formattedPart = part.replace(/-/g, ' ').replace(/\b\w/g, (l: string) => l.toUpperCase());
+
+      // Create span for the part
+      const span = document.createElement('span');
+
+      // Last part is not a link
+      if (index === displayParts.length - 1) {
+        span.textContent = formattedPart;
+        // Set topbar title to the last part (page title) - unless it's a post page
+        if (!isPostPage) {
+          topbarTitle.textContent = formattedPart;
+        }
+      } else {
+        // Intermediate parts are links
+        const link = document.createElement('a');
+        const partIndex = parts.indexOf(part);
+        link.href = '/' + parts.slice(0, partIndex + 1).join('/');
+        link.textContent = formattedPart;
+        span.appendChild(link);
+      }
+
+      breadcrumb.appendChild(span);
+    });
+
+    // If topbar title is still empty (edge case), use the last breadcrumb part
+    // unless it's a post page (should show "Post")
+    if (!topbarTitle.textContent && displayParts.length > 0 && !isPostPage) {
+      const lastPart = displayParts[displayParts.length - 1];
+      topbarTitle.textContent = lastPart.replace(/-/g, ' ').replace(/\b\w/g, (l: string) => l.toUpperCase());
+    }
+  };
+
+  // Update on load
+  document.addEventListener('DOMContentLoaded', updateTopbar);
+
+  // Also update on navigation (for SPAs)
+  document.addEventListener('astro:after-swap', updateTopbar);
+
+  // Sidebar toggle is handled in main.ts to avoid duplicate listeners
+</script>

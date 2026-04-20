@@ -1,0 +1,155 @@
+@use '../abstracts/variables' as v;
+@use '../abstracts/breakpoints' as bp;
+@use '../abstracts/mixins' as mx;
+@use '../abstracts/placeholders';
+
+/* Astro Code Block Styling (Shiki-based) */
+
+// Wrapper div styling (matches div[class^='language-'] in _syntax.scss)
+div[class^='language-'].highlighter-rouge {
+  @extend %rounded;
+  @extend %code-snippet-bg;
+
+  box-shadow: var(--language-border-color) 0 0 0 1px;
+  margin-bottom: 1.2em;
+
+  // Full width on mobile (match Jekyll behavior)
+  .content > & {
+    @include mx.ml-mr(-1rem);
+    border-radius: 0;
+
+    @include bp.sm {
+      @include mx.ml-mr(0);
+      border-radius: v.$radius-lg;
+    }
+  }
+
+  // Code header styling
+  .code-header {
+    @include bp.sm {
+      @include mx.ml-mr(0);
+
+      $dot-margin: 1rem;
+
+      &::before {
+        content: '';
+        display: inline-block;
+        margin-left: $dot-margin;
+        width: v.$code-dot-size;
+        height: v.$code-dot-size;
+        border-radius: 50%;
+        background-color: var(--code-header-muted-color);
+        box-shadow: (v.$code-dot-size + v.$code-dot-gap) 0 0
+            var(--code-header-muted-color),
+          (v.$code-dot-size + v.$code-dot-gap) * 2 0 0
+            var(--code-header-muted-color);
+      }
+
+      span {
+        // center the text of label
+        margin-left: calc(($dot-margin + v.$code-dot-size) / 2 * -1);
+      }
+    }
+  }
+
+  // Code block inside wrapper - remove top border radius to connect with header
+  pre.astro-code {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    margin-top: -0.5rem; // Reduce gap between code-header and code block
+  }
+}
+
+// Make Astro code blocks behave like Jekyll code blocks
+pre.astro-code {
+  @extend %code-snippet-bg;
+  @extend %rounded;
+
+  overflow: auto;
+  padding: 0.75rem 1rem;
+  margin: 0; // Remove margins to connect seamlessly with header
+  font-size: v.$code-font-size;
+  line-height: 1.4rem;
+
+  code {
+    background-color: transparent !important;
+    padding: 0;
+    counter-reset: line;
+  }
+
+  // Line numbers using CSS counters - match Jekyll/Rouge table layout
+  &.show-line-numbers {
+    padding-right: 2rem; // Match original padding
+
+    code {
+      counter-reset: line var(--start-line, 0);
+    }
+
+    code .line::before {
+      content: counter(line);
+      counter-increment: line;
+      display: inline-block;
+      width: 2.5rem;
+      margin-left: -2rem; // Negative margin to pull line numbers further left
+      margin-right: 0.75rem;
+      text-align: right;
+      color: var(--highlight-lineno-color);
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+  }
+}
+
+// Shiki dual-theme support: explicit rules for both light and dark modes
+html[data-mode='light'] {
+  pre.astro-code,
+  pre.astro-code span {
+    color: var(--shiki-light) !important;
+  }
+
+  pre.astro-code {
+    background-color: var(--shiki-light-bg) !important;
+  }
+}
+
+html[data-mode='dark'] {
+  pre.astro-code,
+  pre.astro-code span {
+    color: var(--shiki-dark) !important;
+  }
+
+  pre.astro-code {
+    background-color: var(--shiki-dark-bg) !important;
+  }
+}
+
+// Inline code (when not in pre block)
+:not(pre) > code {
+  -webkit-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+  color: var(--code-color);
+  font-size: v.$code-font-size;
+  padding: 3px 5px;
+  overflow-wrap: break-word;
+  border-radius: v.$radius-sm;
+  background-color: var(--inline-code-bg);
+
+  &.filepath {
+    background-color: inherit;
+    color: var(--filepath-text-color);
+    font-weight: 600;
+    padding: 0;
+  }
+
+  a > & {
+    padding-bottom: 0;
+    color: inherit;
+  }
+
+  blockquote & {
+    color: inherit;
+  }
+}

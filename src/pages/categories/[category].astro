@@ -1,0 +1,62 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { getAllCategories, getPostsByCategory } from '@/utils/taxonomy';
+import { getPostUrl } from '@/utils/slug';
+
+export async function getStaticPaths() {
+  const categories = await getAllCategories();
+  const paths = [];
+
+  for (const [slug, category] of categories) {
+    paths.push({
+      params: { category: slug },
+      props: { categorySlug: slug, categoryName: category.name },
+    });
+  }
+
+  return paths;
+}
+
+const { categorySlug, categoryName } = Astro.props;
+const posts = await getPostsByCategory(categorySlug);
+
+// Format date for display
+function formatDate(date: Date): { day: string; month: string; year: number } {
+  return {
+    day: date.getDate().toString().padStart(2, '0'),
+    month: date.toLocaleDateString('en-US', { month: 'short' }),
+    year: date.getFullYear(),
+  };
+}
+---
+
+<BaseLayout title={`Category: ${categoryName}`}>
+  <article class="px-1">
+    <div id="page-category">
+      <h1 class="ps-lg-2">
+        <i class="far fa-folder-open fa-fw text-muted"></i>
+        {categoryName}
+        <span class="lead text-muted ps-2">{posts.length}</span>
+      </h1>
+      <ul class="content ps-0">
+        {
+          posts.map(post => {
+            const postUrl = getPostUrl(post.slug);
+            const { day, month, year } = formatDate(post.data.date);
+
+            return (
+              <li class="d-flex justify-content-between px-md-3">
+                <a href={postUrl}>{post.data.title}</a>
+                <span class="dash flex-grow-1" />
+                <span class="text-muted small text-nowrap">
+                  {month} {day}
+                  {post.data.date.getFullYear() !== new Date().getFullYear() && `, ${year}`}
+                </span>
+              </li>
+            );
+          })
+        }
+      </ul>
+    </div>
+  </article>
+</BaseLayout>

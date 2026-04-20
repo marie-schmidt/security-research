@@ -1,0 +1,57 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import { getPostsByYear } from '@/utils/taxonomy';
+import { getPostUrl } from '@/utils/slug';
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+
+const yearGroups = await getPostsByYear();
+
+// Format date
+function formatDate(date: Date) {
+  return {
+    day: date.getDate().toString().padStart(2, '0'),
+    month: date.toLocaleDateString('en-US', { month: 'short' }),
+    timestamp: Math.floor(date.getTime() / 1000),
+  };
+}
+---
+
+<BaseLayout title={title}>
+  <article class="px-1">
+    <h1 class="dynamic-title">{title}</h1>
+    <div class="content">
+      <div id="archives" class="pl-xl-3">
+        {
+          yearGroups.map(({ year, posts }, _yearIndex) => (
+            <>
+              <time class="year lead d-block">{year}</time>
+              <ul class="list-unstyled">
+                {posts.map(post => {
+                  const postUrl = getPostUrl(post.slug);
+                  const { day, month, timestamp } = formatDate(post.data.date);
+
+                  return (
+                    <li>
+                      <span class="date day" data-ts={timestamp} data-df="DD">
+                        {day}
+                      </span>
+                      <span class="date month small text-muted ms-1" data-ts={timestamp} data-df="MMM">
+                        {month}
+                      </span>
+                      <a href={postUrl}>{post.data.title}</a>
+                    </li>
+                  );
+                })}
+              </ul>
+            </>
+          ))
+        }
+      </div>
+    </div>
+  </article>
+</BaseLayout>

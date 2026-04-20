@@ -1,0 +1,33 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@layouts/BaseLayout.astro';
+import CategoriesLayout from '@layouts/CategoriesLayout.astro';
+import TagsLayout from '@layouts/TagsLayout.astro';
+import ArchivesLayout from '@layouts/ArchivesLayout.astro';
+
+export async function getStaticPaths() {
+  const tabs = await getCollection('tabs');
+  return tabs.map((tab) => ({
+    params: { slug: tab.slug },
+    props: { tab },
+  }));
+}
+
+const { tab } = Astro.props;
+const { Content } = await tab.render();
+const layout = tab.data.layout || 'default';
+---
+
+{layout === 'categories' && <CategoriesLayout title={tab.data.title} />}
+{layout === 'tags' && <TagsLayout title={tab.data.title} />}
+{layout === 'archives' && <ArchivesLayout title={tab.data.title} />}
+{layout === 'default' && (
+  <BaseLayout title={tab.data.title}>
+    <article class="px-1">
+      <h1 class="dynamic-title">{tab.data.title}</h1>
+      <div class="content">
+        <Content />
+      </div>
+    </article>
+  </BaseLayout>
+)}

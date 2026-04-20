@@ -1,0 +1,34 @@
+---
+import { getCollection } from 'astro:content';
+import { getPostUrl } from '@/utils/slug';
+
+export interface Props {
+  lang?: string;
+}
+
+const { lang: _lang } = Astro.props;
+
+// Get recently updated posts
+const posts = await getCollection('posts');
+const recentlyUpdated = posts
+  .filter(post => !post.data.hidden)
+  .sort((a, b) => {
+    const dateA = new Date(a.data.date);
+    const dateB = new Date(b.data.date);
+    return dateB.getTime() - dateA.getTime();
+  })
+  .slice(0, 5);
+---
+
+{recentlyUpdated.length > 0 && (
+  <section id="access-lastmod">
+    <h2 class="panel-heading">Recently Updated</h2>
+    <ul class="content list-unstyled ps-0 pb-1 ms-1 mt-2">
+      {recentlyUpdated.map((post) => (
+        <li class="text-truncate lh-lg">
+          <a href={getPostUrl(post.slug)}>{post.data.title}</a>
+        </li>
+      ))}
+    </ul>
+  </section>
+)}

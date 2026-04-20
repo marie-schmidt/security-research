@@ -1,0 +1,35 @@
+---
+import { SOCIAL } from '@/config';
+
+export interface Props {
+  lang?: string;
+}
+
+const { lang: _lang } = Astro.props;
+const currentYear = new Date().getFullYear();
+---
+
+<footer aria-label="Site Info" class=" d-flex flex-column justify-content-center text-muted flex-lg-row justify-content-lg-between align-items-lg-center pb-lg-3 ">
+  <p>
+    © <time>{currentYear}</time>
+    <a href={SOCIAL.links[0] || '/'}>{SOCIAL.name}</a>.
+    <span
+      data-bs-toggle="tooltip"
+      data-bs-placement="top"
+      title="Except where otherwise noted, the blog posts on this site are licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0) License by the author."
+    >
+      Some rights reserved.
+    </span>
+  </p>
+
+  <p>
+    Built with <a
+      data-bs-toggle="tooltip"
+      data-bs-placement="top"
+      href="https://github.com/geocine/astro-chirpy"
+      target="_blank"
+      rel="noopener"
+      title="Astro Chirpy Theme"
+    >Astro Chirpy</a> powered by <a href="https://astro.build" target="_blank" rel="noopener">Astro</a>.
+  </p>
+</footer>

@@ -1,0 +1,11 @@
+---
+export interface Props {
+  type: 'tip' | 'info' | 'warning' | 'danger';
+}
+
+const { type } = Astro.props;
+---
+
+<blockquote class={`prompt-${type}`}>
+  <slot />
+</blockquote>

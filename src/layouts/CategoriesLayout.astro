@@ -1,0 +1,183 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import { getAllCategories } from '@/utils/taxonomy';
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+
+const categories = await getAllCategories();
+const sortedCategories = Array.from(categories.entries()).sort((a, b) =>
+  a[1].name.localeCompare(b[1].name)
+);
+---
+
+<BaseLayout title={title}>
+  <article class="px-1">
+    <h1 class="dynamic-title">{title}</h1>
+    <div class="content">
+      {
+        sortedCategories.map(([slug, category], index) => {
+        const hasSubCategories = category.subCategories.size > 0;
+        const sortedSubCategories = Array.from(category.subCategories.entries()).sort((a, b) =>
+          a[0].localeCompare(b[0])
+        );
+
+        return (
+          <div class="card categories">
+            <div
+              id={`h_${index}`}
+              class={`card-header d-flex justify-content-between ${hasSubCategories ? 'hide-border-bottom' : ''}`}
+            >
+              <span class="ms-2">
+                <i class={`far fa-folder${hasSubCategories ? '-open' : ''} fa-fw`} />
+                <a href={`/categories/${slug}/`} class="mx-2">
+                  {category.name}
+                </a>
+                <span class="text-muted small font-weight-light">
+                  {hasSubCategories && (
+                    <>
+                      {category.subCategories.size}{' '}
+                      {category.subCategories.size === 1 ? 'category' : 'categories'},{' '}
+                    </>
+                  )}
+                  {category.count} {category.count === 1 ? 'post' : 'posts'}
+                </span>
+              </span>
+              {hasSubCategories ? (
+                <a
+                  href={`#l_${index}`}
+                  data-bs-toggle="collapse"
+                  aria-expanded="true"
+                  aria-label={`h_${index}-trigger`}
+                  class="category-trigger hide-border-bottom"
+                >
+                  <i class="fas fa-fw fa-angle-down" />
+                </a>
+              ) : (
+                <span data-bs-toggle="collapse" class="category-trigger hide-border-bottom disabled">
+                  <i class="fas fa-fw fa-angle-right" />
+                </span>
+              )}
+            </div>
+            {hasSubCategories && (
+              <div id={`l_${index}`} class="collapse show" aria-expanded="true">
+                <ul class="list-group">
+                  {sortedSubCategories.map(([subSlug, subCategory]) => {
+                    const subCategoryName = subSlug
+                      .split('-')
+                      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                      .join(' ');
+
+                    return (
+                      <li class="list-group-item">
+                        <i class="far fa-folder fa-fw" />
+                        <a href={`/categories/${slug}/${subSlug}/`} class="mx-2">
+                          {subCategoryName}
+                        </a>
+                        <span class="text-muted small font-weight-light">
+                          {subCategory.count} {subCategory.count === 1 ? 'post' : 'posts'}
+                        </span>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            )}
+          </div>
+        );
+      })
+    }
+    </div>
+  </article>
+</BaseLayout>
+
+<script is:inline>
+  /**
+   * Tab 'Categories' expand/close effect.
+   * Matches original Jekyll Chirpy implementation.
+   */
+  function initCategoryCollapse() {
+    const childPrefix = 'l_';
+    const parentPrefix = 'h_';
+    const triggers = document.querySelectorAll('.category-trigger:not(.disabled)');
+
+    triggers.forEach((trigger) => {
+      trigger.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        const href = this.getAttribute('href');
+        if (!href) return;
+
+        const targetId = href.substring(1); // Remove the '#'
+        const target = document.getElementById(targetId);
+        if (!target) return;
+
+        const parentId = parentPrefix + targetId.substring(childPrefix.length);
+        const parent = document.getElementById(parentId);
+        if (!parent) return;
+
+        const isCollapsed = target.classList.contains('show');
+
+        if (isCollapsed) {
+          // Collapsing
+          target.classList.remove('show');
+          target.style.height = target.scrollHeight + 'px';
+          setTimeout(() => {
+            target.style.height = '0px';
+          }, 10);
+
+          const folderIcon = parent.querySelector('.far.fa-folder-open');
+          const angleIcon = parent.querySelector('.fas.fa-angle-down');
+
+          if (folderIcon) {
+            folderIcon.className = 'far fa-folder fa-fw';
+          }
+          if (angleIcon) {
+            angleIcon.classList.add('rotate');
+          }
+          parent.classList.remove('hide-border-bottom');
+        } else {
+          // Expanding
+          target.classList.add('show');
+          target.style.height = target.scrollHeight + 'px';
+
+          setTimeout(() => {
+            target.style.height = 'auto';
+          }, 300);
+
+          const folderIcon = parent.querySelector('.far.fa-folder');
+          const angleIcon = parent.querySelector('.fas.fa-angle-down');
+
+          if (folderIcon) {
+            folderIcon.className = 'far fa-folder-open fa-fw';
+          }
+          if (angleIcon) {
+            angleIcon.classList.remove('rotate');
+          }
+          parent.classList.add('hide-border-bottom');
+        }
+      });
+    });
+
+    // Add transition styles
+    const collapseElements = document.getElementsByClassName('collapse');
+    for (let i = 0; i < collapseElements.length; i++) {
+      const elem = collapseElements[i];
+      elem.style.overflow = 'hidden';
+      elem.style.transition = 'height 0.3s ease';
+    }
+  }
+
+  // Initialize on page load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCategoryCollapse);
+  } else {
+    initCategoryCollapse();
+  }
+
+  // Re-initialize after view transitions
+  document.addEventListener('astro:after-swap', initCategoryCollapse);
+</script>

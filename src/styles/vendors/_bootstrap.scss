@@ -1,0 +1,4 @@
+// Import Bootstrap using modern @use syntax
+// Note: Bootstrap 5.x still uses @import internally, but we use @use here
+// The 'as *' makes all Bootstrap functions/mixins available without namespace
+@use 'bootstrap/scss/bootstrap' as *;

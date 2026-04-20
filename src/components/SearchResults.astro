@@ -1,0 +1,35 @@
+---
+import { getAllTags } from '@/utils/taxonomy';
+
+export interface Props {
+  lang?: string;
+}
+
+const { lang: _lang } = Astro.props;
+
+// Get all tags for search hints
+const allTags = await getAllTags();
+// Show top 10 tags by count
+const trendingTags = allTags
+  .sort((a, b) => b.count - a.count)
+  .slice(0, 10);
+---
+
+<div id="search-result-wrapper" class="d-flex justify-content-center d-none">
+  <div class="col-11 content">
+    <div id="search-hints">
+      <section>
+        <h2 class="panel-heading">Trending Tags</h2>
+        <div class="d-flex flex-wrap mt-3 mb-1 me-3">
+          {trendingTags.map(tag => (
+            <a href={`/tags/${tag.slug}`} class="post-tag btn btn-outline-primary">
+              {tag.name}
+            </a>
+          ))}
+        </div>
+      </section>
+    </div>
+    <div id="search-results" class="d-flex flex-wrap justify-content-center text-muted mt-3"></div>
+  </div>
+</div>
+

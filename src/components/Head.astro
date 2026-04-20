@@ -1,0 +1,500 @@
+---
+import { ViewTransitions } from 'astro:transitions';
+import { SITE, ANALYTICS, WEBMASTER_VERIFICATIONS } from '@/config';
+
+export interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  math?: boolean;
+  mermaid?: boolean;
+}
+
+const { title, description, image, math = false, mermaid = false } = Astro.props;
+
+const pageTitle = title ? `${title} | ${SITE.title}` : SITE.title;
+const pageDescription = description || SITE.description;
+// Use avatar as fallback for social preview image
+const pageImage = image || SITE.social_preview_image || SITE.avatar;
+const canonicalURL = new URL(Astro.url.pathname, SITE.url).href;
+
+// Handle image URL (add CDN if needed)
+const getImageUrl = (src: string) => {
+  if (!src) return '';
+  if (src.startsWith('http://') || src.startsWith('https://')) return src;
+  // Always add CDN for relative paths
+  if (src.startsWith('/') && SITE.cdn) return `${SITE.cdn}${src}`;
+  // If no CDN but starts with /, make it absolute
+  if (src.startsWith('/')) return new URL(src, SITE.url).href;
+  return src;
+};
+
+const socialImage = getImageUrl(pageImage);
+---
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover" />
+  <meta name="generator" content={Astro.generator} />
+
+  <!-- Theme Colors -->
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f7f7f7" />
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1b1b1e" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+  <!-- SEO -->
+  <title>{pageTitle}</title>
+  <meta name="description" content={pageDescription} />
+  <link rel="canonical" href={canonicalURL} />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={canonicalURL} />
+  <meta property="og:title" content={pageTitle} />
+  <meta property="og:description" content={pageDescription} />
+  {socialImage && <meta property="og:image" content={socialImage} />}
+  <meta property="og:site_name" content={SITE.title} />
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content={canonicalURL} />
+  <meta property="twitter:title" content={pageTitle} />
+  <meta property="twitter:description" content={pageDescription} />
+  {socialImage && <meta property="twitter:image" content={socialImage} />}
+
+  <!-- Webmaster Verifications -->
+  {WEBMASTER_VERIFICATIONS.google && <meta name="google-site-verification" content={WEBMASTER_VERIFICATIONS.google} />}
+  {WEBMASTER_VERIFICATIONS.bing && <meta name="msvalidate.01" content={WEBMASTER_VERIFICATIONS.bing} />}
+  {WEBMASTER_VERIFICATIONS.yandex && <meta name="yandex-verification" content={WEBMASTER_VERIFICATIONS.yandex} />}
+  {WEBMASTER_VERIFICATIONS.baidu && <meta name="baidu-site-verification" content={WEBMASTER_VERIFICATIONS.baidu} />}
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" href="/assets/img/favicons/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/assets/img/favicons/favicon.svg" />
+  <link rel="shortcut icon" href="/assets/img/favicons/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicons/apple-touch-icon.png" />
+  <link rel="manifest" href="/assets/img/favicons/site.webmanifest" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Source+Sans+Pro:wght@400;600;700;900&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+
+  <!-- Theme Script (must run before page renders) -->
+  <script is:inline>
+    const getThemePreference = () => {
+      const stored = localStorage.getItem('theme');
+      if (stored) return stored;
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    };
+
+    // Set theme on initial load (without dispatching event to avoid double-render)
+    const theme = getThemePreference();
+    document.documentElement.setAttribute('data-mode', theme);
+
+    // Ensure theme persists across View Transitions
+    // CRITICAL: Set theme on the NEW document before swap to prevent flash
+    document.addEventListener('astro:before-swap', (ev) => {
+      const currentTheme = getThemePreference();
+      // Set theme on the new document that will be swapped in
+      ev.newDocument.documentElement.setAttribute('data-mode', currentTheme);
+    });
+  </script>
+
+  <!-- Analytics -->
+  {import.meta.env.PROD && ANALYTICS.google.id && (
+    <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${ANALYTICS.google.id}`}></script>
+    <script is:inline define:vars={{ gaId: ANALYTICS.google.id }}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', gaId);
+    </script>
+  )}
+
+  <!-- MathJax -->
+  {math && (
+    <>
+      <script is:inline>
+        // Configure MathJax before loading
+        window.MathJax = {
+          tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']],
+            tags: 'ams'
+          },
+          startup: {
+            pageReady: () => {
+              return window.MathJax.startup.defaultPageReady().then(() => {
+                console.log('MathJax initial render complete');
+              });
+            }
+          }
+        };
+      </script>
+      <script is:inline src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    </>
+  )}
+
+  <!-- MathJax View Transitions Handler (always loaded to handle transitions) -->
+  <script>
+    // Function to check if page has math content
+    function hasMathContent() {
+      // Check for MathJax script tags or common math delimiters
+      const hasMathScripts = document.querySelector('script[type="math/tex"], script[type="math/tex; mode=display"]') !== null;
+      const hasMathDelimiters = document.body.textContent?.match(/\$\$[\s\S]+?\$\$|\\\[[\s\S]+?\\\]|\$[^\$]+?\$|\\\([\s\S]+?\\\)/) !== null;
+      return hasMathScripts || hasMathDelimiters;
+    }
+
+    // Function to load MathJax if needed
+    async function loadMathJax() {
+      const win = window as any;
+
+      // Check if page has math content
+      if (!hasMathContent()) {
+        return;
+      }
+
+      // If MathJax is already loaded, just return
+      if (win.MathJax) {
+        return;
+      }
+
+      // Configure MathJax before loading
+      win.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          displayMath: [['$$', '$$'], ['\\[', '\\]']],
+          tags: 'ams'
+        },
+        startup: {
+          pageReady: () => {
+            return win.MathJax.startup.defaultPageReady();
+          }
+        }
+      };
+
+      // Load MathJax script
+      return new Promise<void>((resolve, reject) => {
+        const script = document.createElement('script');
+        script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js';
+        script.async = true;
+        script.onload = () => {
+          resolve();
+        };
+        script.onerror = () => reject(new Error('Failed to load MathJax'));
+        document.head.appendChild(script);
+      });
+    }
+
+    // Function to render MathJax on current page
+    async function renderMathJax() {
+      const win = window as any;
+
+      // Check if page has math content first
+      if (!hasMathContent()) {
+        return;
+      }
+
+      // First, ensure MathJax is loaded if needed
+      await loadMathJax();
+
+      // Wait a bit for MathJax to be fully initialized
+      if (typeof win.MathJax === 'undefined') {
+        await new Promise(resolve => setTimeout(resolve, 100));
+      }
+
+      if (typeof win.MathJax !== 'undefined' && win.MathJax.typesetPromise) {
+        try {
+          // Clear any previous typeset state to prevent errors
+          if (win.MathJax.typesetClear) {
+            await win.MathJax.typesetClear();
+          }
+
+          // Typeset the current page
+          await win.MathJax.typesetPromise();
+        } catch (err) {
+          console.error('[MathJax] Typeset error:', err);
+        }
+      }
+    }
+
+    // Render on initial load and after view transitions
+    document.addEventListener('astro:page-load', () => {
+      // Small delay to ensure DOM is ready
+      setTimeout(renderMathJax, 10);
+    });
+
+    // Also handle theme changes (MathJax may need to re-render)
+    document.addEventListener('themechange', () => {
+      setTimeout(renderMathJax, 10);
+    });
+  </script>
+
+  <!-- Mermaid client-side rendering -->
+  {mermaid && (
+    <>
+      <style is:inline>
+        /* Hide unprocessed Mermaid code to prevent flash */
+        pre.mermaid {
+          display: none;
+        }
+
+        /* Show rendered Mermaid diagrams */
+        pre.mermaid[data-processed="true"] {
+          display: flex;
+          justify-content: center;
+          margin: 1.5rem 0;
+          background: transparent;
+          border: none;
+          padding: 0;
+        }
+
+        pre.mermaid[data-processed="true"] svg {
+          max-width: 100%;
+          height: auto;
+        }
+      </style>
+      <script is:inline src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+    </>
+  )}
+
+  <!-- Mermaid View Transitions Handler -->
+  {mermaid && (
+    <script is:inline>
+      (function() {
+        async function renderMermaid() {
+          const win = window;
+
+          // Wait for Mermaid to be available
+          if (typeof win.mermaid === 'undefined') {
+            // Try again after a short delay
+            setTimeout(renderMermaid, 100);
+            return;
+          }
+
+          // Find all mermaid blocks (both processed and unprocessed for theme changes)
+          const mermaidBlocks = document.querySelectorAll('pre.mermaid');
+
+          if (mermaidBlocks.length === 0) return;
+
+          try {
+            // Get theme from data-mode attribute which is set by the inline theme script
+            // This is the canonical source of truth, set synchronously before page render
+            const htmlEl = document.documentElement;
+            const dataMode = htmlEl.getAttribute('data-mode');
+
+            // Fallback to localStorage if data-mode somehow isn't set
+            const storedTheme = localStorage.getItem('theme');
+            const systemPreference = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+
+            const currentTheme = dataMode || storedTheme || systemPreference;
+            const isDark = currentTheme === 'dark';
+
+          // Always use 'base' theme and fully customize colors
+          win.mermaid.initialize({
+            startOnLoad: false,
+            theme: 'base',
+            themeVariables: isDark ? {
+              // Dark mode: Light colors on dark background
+              darkMode: true,
+              background: '#1b1b1e',
+
+              // Main diagram colors
+              primaryColor: '#264f78',
+              primaryTextColor: '#ffffff',
+              primaryBorderColor: '#4a9eff',
+              lineColor: '#4a9eff',
+
+              // Text colors - ALL WHITE for visibility
+              textColor: '#ffffff',
+
+              // Actor/participant styling
+              actorBorder: '#4a9eff',
+              actorBkg: '#264f78',
+              actorTextColor: '#ffffff',
+              actorLineColor: '#4a9eff',
+
+              // Signal/message styling - WHITE TEXT
+              signalColor: '#ffffff',
+              signalTextColor: '#ffffff',
+
+              // Label and note styling - WHITE TEXT
+              labelBoxBkgColor: '#264f78',
+              labelBoxBorderColor: '#4a9eff',
+              labelTextColor: '#ffffff',
+              noteTextColor: '#ffffff',
+              noteBkgColor: '#264f78',
+              noteBorderColor: '#4a9eff',
+
+              // Loop styling - WHITE TEXT
+              loopTextColor: '#ffffff',
+
+              // Activation styling
+              activationBorderColor: '#4a9eff',
+              activationBkgColor: '#264f78',
+
+              // Sequence number - DARK for contrast on white circle
+              sequenceNumberColor: '#1b1b1e',
+
+              // Additional text elements - ALL WHITE
+              edgeLabelBackground: '#1b1b1e',
+              tertiaryColor: '#264f78',
+              tertiaryTextColor: '#ffffff',
+              tertiaryBorderColor: '#4a9eff'
+            } : {
+              // Light mode: Dark colors on white background
+              darkMode: false,
+              background: '#ffffff',
+
+              // Main diagram colors
+              primaryColor: '#b3d9ff',
+              primaryTextColor: '#000000',
+              primaryBorderColor: '#0066cc',
+              lineColor: '#0066cc',
+
+              // Text colors - ALL DARK for visibility
+              textColor: '#000000',
+
+              // Actor/participant styling
+              actorBorder: '#0066cc',
+              actorBkg: '#b3d9ff',
+              actorTextColor: '#000000',
+              actorLineColor: '#0066cc',
+
+              // Signal/message styling - DARK TEXT
+              signalColor: '#000000',
+              signalTextColor: '#000000',
+
+              // Label and note styling - DARK TEXT
+              labelBoxBkgColor: '#b3d9ff',
+              labelBoxBorderColor: '#0066cc',
+              labelTextColor: '#000000',
+              noteTextColor: '#000000',
+              noteBkgColor: '#ffffcc',
+              noteBorderColor: '#cccc00',
+
+              // Loop styling - DARK TEXT
+              loopTextColor: '#000000',
+
+              // Activation styling
+              activationBorderColor: '#0066cc',
+              activationBkgColor: '#cce5ff',
+
+              // Sequence number
+              sequenceNumberColor: '#ffffff',
+
+              // Additional text elements - ALL DARK
+              edgeLabelBackground: '#ffffff',
+              tertiaryColor: '#e6f2ff',
+              tertiaryTextColor: '#000000',
+              tertiaryBorderColor: '#0066cc'
+            }
+          });
+
+          // Process each block (re-render all to apply new theme)
+          for (let i = 0; i < mermaidBlocks.length; i++) {
+            const block = mermaidBlocks[i];
+            const isProcessed = block.getAttribute('data-processed') === 'true';
+
+            // Get original code from hidden code element or textContent
+            let codeElement = block.querySelector('code.mermaid-source');
+            let code = '';
+
+            if (codeElement) {
+              // Get code from hidden code element (persists across theme changes)
+              code = codeElement.textContent || '';
+            } else if (!isProcessed) {
+              // First time rendering - get from textContent
+              code = block.textContent || '';
+            } else {
+              // Already processed but no stored code - skip this block
+              console.warn('[Mermaid] Block already processed but no original code stored, skipping');
+              continue;
+            }
+
+            try {
+              // Render the diagram with current theme
+              const result = await win.mermaid.render('mermaid-' + Date.now() + '-' + i, code);
+              const svg = result.svg;
+
+              // Store original code in hidden element before replacing content
+              if (!codeElement) {
+                codeElement = document.createElement('code');
+                codeElement.className = 'mermaid-source';
+                codeElement.style.display = 'none';
+                codeElement.textContent = code;
+              }
+
+              // Replace content with hidden code + SVG
+              block.innerHTML = '';
+              block.appendChild(codeElement);
+              block.insertAdjacentHTML('beforeend', svg);
+              block.setAttribute('data-processed', 'true');
+            } catch (err) {
+              console.error('[Mermaid] Render error for block', i, ':', err);
+              // Show the original code if rendering failed
+              block.textContent = code;
+              block.style.display = 'block';
+            }
+          }
+        } catch (err) {
+          console.error('[Mermaid] Rendering error:', err);
+        }
+      }
+
+      // Remove any existing listeners to prevent duplicates
+      if (window.__mermaidThemeListener) {
+        window.removeEventListener('themechange', window.__mermaidThemeListener);
+      }
+      if (window.__mermaidThemeObserver) {
+        window.__mermaidThemeObserver.disconnect();
+      }
+
+      // Create listener function and store reference
+      window.__mermaidThemeListener = function() {
+        renderMermaid();
+      };
+
+      // Add the event listener to window (same target where theme.ts dispatches the event)
+      window.addEventListener('themechange', window.__mermaidThemeListener);
+
+      // ALSO use MutationObserver as backup to watch data-mode attribute changes
+      window.__mermaidThemeObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          if (mutation.type === 'attributes' && mutation.attributeName === 'data-mode') {
+            renderMermaid();
+          }
+        });
+      });
+
+      // Observe data-mode attribute changes on html element
+      window.__mermaidThemeObserver.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['data-mode']
+      });
+
+      // Render on page load and after view transitions
+      document.addEventListener('astro:page-load', function() {
+        renderMermaid();
+      });
+
+      // Render immediately on initial page load (in case astro:page-load already fired)
+      // This ensures Mermaid renders with correct theme on first load
+      renderMermaid();
+    })();
+    </script>
+  )}
+
+  <!-- Main scripts -->
+  <script>
+    import '@scripts/main.ts';
+  </script>
+
+  <!-- View Transitions -->
+  <ViewTransitions />
+</head>

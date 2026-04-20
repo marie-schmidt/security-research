@@ -1,0 +1,31 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import { getAllTags } from '@/utils/taxonomy';
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+
+const tags = await getAllTags();
+---
+
+<BaseLayout title={title}>
+  <article class="px-1">
+    <h1 class="dynamic-title">{title}</h1>
+    <div class="content">
+      <div id="tags" class="d-flex flex-wrap mx-xl-2">
+        {
+          tags.map(tag => (
+            <div>
+              <a class="tag" href={`/tags/${tag.slug}/`}>
+                {tag.name}<span class="text-muted">{tag.count}</span>
+              </a>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </article>
+</BaseLayout>

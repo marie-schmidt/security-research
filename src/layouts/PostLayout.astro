@@ -1,0 +1,358 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import type { CollectionEntry } from 'astro:content';
+import { SITE, SOCIAL } from '@/config';
+import { getAuthor } from '@/utils/authors';
+import fs from 'fs';
+import path from 'path';
+
+export interface Props {
+  post: CollectionEntry<'posts'>;
+  olderPost?: CollectionEntry<'posts'> | null;
+  newerPost?: CollectionEntry<'posts'> | null;
+  relatedPosts?: CollectionEntry<'posts'>[];
+}
+
+const { post, olderPost, newerPost, relatedPosts = [] } = Astro.props;
+const { title, description, date, categories, tags, image, author, math, mermaid } = post.data;
+
+// Get author details
+const authorData = author ? getAuthor(author) : null;
+const authorName = authorData?.name || author || SOCIAL.name || 'Author';
+const authorUrl = authorData?.url || (author ? `https://github.com/${author}/` : SOCIAL.links[0] || '#');
+
+// Format date using short month format (e.g., "Aug 9, 2019")
+const formattedDate = new Date(date).toLocaleDateString(SITE.lang, {
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric'
+});
+
+// Calculate read time (rough estimate: 200 words per minute)
+const content = post.body;
+const words = content.trim().split(/\s+/).length;
+const readTime = Math.ceil(words / 200);
+
+// Get the last modified date from file stats
+let updatedDate = date;
+let formattedUpdatedDate = formattedDate;
+try {
+  const filePath = path.join(process.cwd(), 'src/content/posts', post.id);
+  const stats = fs.statSync(filePath);
+  updatedDate = stats.mtime;
+  formattedUpdatedDate = new Date(updatedDate).toLocaleDateString(SITE.lang, {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric'
+  });
+} catch (error) {
+  // Fall back to published date if file stats are not available
+  updatedDate = date;
+  formattedUpdatedDate = formattedDate;
+}
+
+// Helper to get full image URL
+const getImageUrl = (path: string) => {
+  if (!path) return '';
+  if (path.startsWith('http://') || path.startsWith('https://')) return path;
+  if (path.startsWith('/')) {
+    // Check if we have a CDN configured
+    if (SITE.cdn) return `${SITE.cdn}${path}`;
+    // Otherwise use chirpy-img CDN for image assets
+    return `https://chirpy-img.netlify.app${path}`;
+  }
+  return path;
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  image={image?.path}
+  panelIncludes={['toc']}
+  tailIncludes={['related-posts', 'post-nav', 'comments']}
+  math={math}
+  mermaid={mermaid}
+  olderPost={olderPost}
+  newerPost={newerPost}
+  relatedPosts={relatedPosts}
+>
+  <article class="px-1" data-toc="true">
+    <header>
+      <h1 data-toc-skip>{title}</h1>
+      {description && (
+        <p class="post-desc fw-light mb-4">{description}</p>
+      )}
+
+      <div class="post-meta text-muted">
+        <span>
+          Posted
+          <time
+            data-ts={Math.floor(date.getTime() / 1000)}
+            data-df="ll"
+            data-bs-toggle="tooltip"
+            data-bs-placement="bottom"
+          >
+            {formattedDate}
+          </time>
+        </span>
+
+        <span>
+          Updated
+          <time
+            data-ts={Math.floor(updatedDate.getTime() / 1000)}
+            data-df="ll"
+            data-bs-toggle="tooltip"
+            data-bs-placement="bottom"
+          >
+            {formattedUpdatedDate}
+          </time>
+        </span>
+
+        {image?.path && (
+          <div class="mt-3 mb-3">
+            <a href={getImageUrl(image.path)} class="popup img-link preview-img">
+              <img
+                src={getImageUrl(image.path)}
+                alt={image.alt || title}
+                loading="lazy"
+              />
+            </a>
+            {image.alt && <figcaption class="text-center pt-2 pb-2">{image.alt}</figcaption>}
+          </div>
+        )}
+
+        <div class="d-flex justify-content-between">
+          <span>
+            By
+            <em>
+              <a href={authorUrl}>{authorName}</a>
+            </em>
+          </span>
+
+          <div>
+            <span
+              class="readtime"
+              data-bs-toggle="tooltip"
+              data-bs-placement="bottom"
+              title={`${words} words`}
+            >
+              <em>{readTime} min</em> read
+            </span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- TOC Bar for mobile/tablet -->
+    <div id="toc-bar" class="d-flex align-items-center justify-content-between invisible">
+      <span class="label text-truncate">{title}</span>
+      <button type="button" class="toc-trigger btn me-1">
+        <i class="fa-solid fa-list-ul fa-fw"></i>
+      </button>
+    </div>
+
+    <!-- TOC Solo Trigger Button -->
+    <button id="toc-solo-trigger" type="button" class="toc-trigger btn btn-outline-secondary btn-sm">
+      <span class="label ps-2 pe-1">Contents</span>
+      <i class="fa-solid fa-angle-right fa-fw"></i>
+    </button>
+
+    <!-- TOC Popup Dialog -->
+    <dialog id="toc-popup" class="p-0">
+      <div class="header d-flex flex-row align-items-center justify-content-between">
+        <div class="label text-truncate py-2 ms-4">{title}</div>
+        <button id="toc-popup-close" type="button" class="btn mx-1 my-1 opacity-75">
+          <i class="fas fa-close"></i>
+        </button>
+      </div>
+      <div id="toc-popup-content" class="px-4 py-3 pb-4"></div>
+    </dialog>
+
+    <div class="content">
+      <slot />
+    </div>
+
+    <!-- Post Tail Wrapper -->
+    <div class="post-tail-wrapper text-muted">
+      <!-- Categories -->
+      <div class="post-meta mb-3">
+        <i class="far fa-folder-open fa-fw me-1"></i>
+        {categories && categories.length > 0 && categories.map((category, i) => (
+          <>
+            <a href={`/categories/${category}/`}>{category}</a>
+            {i < categories.length - 1 && ', '}
+          </>
+        ))}
+      </div>
+
+      <!-- Tags -->
+      {tags && tags.length > 0 && (
+        <div class="post-tags">
+          <i class="fa fa-tags fa-fw me-1"></i>
+          {tags.map(tag => (
+            <a href={`/tags/${tag}/`} class="post-tag no-text-decoration">
+              {tag}
+            </a>
+          ))}
+        </div>
+      )}
+
+      <!-- Post Tail Bottom: License & Share -->
+      <div class="post-tail-bottom d-flex justify-content-between align-items-center mt-5 pb-2">
+        <!-- License -->
+        <div class="license-wrapper">
+          This post is licensed under
+          <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>
+          by the author.
+        </div>
+
+        <!-- Share Buttons -->
+        <div class="share-wrapper d-flex align-items-center">
+          <span class="share-label text-muted">Share</span>
+          <span class="share-icons">
+            <a
+              href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(Astro.url.href)}`}
+              target="_blank"
+              rel="noopener"
+              data-bs-toggle="tooltip"
+              title="Twitter"
+            >
+              <i class="fa-fw fa-brands fa-x-twitter"></i>
+            </a>
+            <a
+              href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(Astro.url.href)}`}
+              target="_blank"
+              rel="noopener"
+              data-bs-toggle="tooltip"
+              title="Facebook"
+            >
+              <i class="fa-fw fab fa-facebook-square"></i>
+            </a>
+            <a
+              href={`https://telegram.me/share/url?url=${encodeURIComponent(Astro.url.href)}&text=${encodeURIComponent(title)}`}
+              target="_blank"
+              rel="noopener"
+              data-bs-toggle="tooltip"
+              title="Telegram"
+            >
+              <i class="fa-fw fab fa-telegram"></i>
+            </a>
+            <button
+              id="copy-link"
+              aria-label="Copy link"
+              data-bs-toggle="tooltip"
+              title="Copy link"
+              type="button"
+            >
+              <i class="fa-fw fas fa-link pe-none fs-6"></i>
+            </button>
+          </span>
+        </div>
+      </div>
+    </div>
+  </article>
+</BaseLayout>
+
+<script>
+  // Add heading anchors client-side (matching original Chirpy theme)
+  function addHeadingAnchors() {
+    const content = document.querySelector('.content');
+    if (!content) return;
+    
+    const headings = content.querySelectorAll('h2[id], h3[id], h4[id], h5[id]');
+    
+    headings.forEach((heading) => {
+      // Skip if already has anchor
+      if (heading.querySelector('.anchor')) return;
+      
+      const id = heading.getAttribute('id');
+      if (!id) return;
+      
+      // Wrap existing content in span
+      const textSpan = document.createElement('span');
+      textSpan.className = 'me-2';
+      while (heading.firstChild) {
+        textSpan.appendChild(heading.firstChild);
+      }
+      
+      // Create anchor link
+      const anchor = document.createElement('a');
+      anchor.href = `#${id}`;
+      anchor.className = 'anchor text-muted';
+      
+      const icon = document.createElement('i');
+      icon.className = 'fas fa-hashtag';
+      anchor.appendChild(icon);
+      
+      // Add both to heading
+      heading.appendChild(textSpan);
+      heading.appendChild(anchor);
+    });
+  }
+  
+  // Fix file attributes (dev mode)
+  function fixFileAttributes() {
+    const content = document.querySelector('.content');
+    if (!content) return;
+    
+    // Find all paragraphs that look like file attributes
+    const paragraphs = Array.from(content.querySelectorAll('p'));
+    paragraphs.forEach((p) => {
+      const text = p.textContent?.trim() || '';
+      // Match {: file='...'} or {: file="..."} with various quote styles
+      // Including Unicode quotes: U+2019 ('), U+201C ("), U+201D (")
+      // Allow optional classes like .nolineno after the filename
+      const match = text.match(/^\{:\s*file\s*=\s*['"\u2019\u201C\u201D]([^'"\u2019\u201C\u201D]+)['"\u2019\u201C\u201D]((?:\s+\.\w+)*)\s*\}$/);
+      
+      if (match) {
+        const filename = match[1];
+        const classes = match[2] || '';
+        const hasNoLineno = classes.includes('.nolineno');
+        
+        // Find the previous sibling code block (walk backwards through siblings)
+        let prevElement = p.previousElementSibling;
+        let attempts = 0;
+        while (prevElement && attempts < 10) {
+          if (prevElement.tagName === 'DIV' && prevElement.classList.contains('highlighter-rouge')) {
+            // Find the code-header span
+            const labelSpan = prevElement.querySelector('.code-header span[data-label-text]');
+            if (labelSpan) {
+              labelSpan.setAttribute('data-label-text', filename);
+              
+              // Update icon to file icon
+              const icon = labelSpan.querySelector('i');
+              if (icon) {
+                icon.className = 'far fa-file-code fa-fw';
+              }
+            }
+            
+            // Handle .nolineno class - remove line numbers
+            if (hasNoLineno) {
+              const pre = prevElement.querySelector('pre');
+              if (pre && pre.classList.contains('show-line-numbers')) {
+                pre.classList.remove('show-line-numbers');
+              }
+            }
+            
+            // Remove the file attribute paragraph
+            p.remove();
+            break;
+          }
+          prevElement = prevElement.previousElementSibling;
+          attempts++;
+        }
+      }
+    });
+  }
+  
+  // Run on page load
+  addHeadingAnchors();
+  fixFileAttributes();
+  
+  // Re-run after view transitions
+  document.addEventListener('astro:after-swap', () => {
+    addHeadingAnchors();
+    fixFileAttributes();
+  });
+</script>
