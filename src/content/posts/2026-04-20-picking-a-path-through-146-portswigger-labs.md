@@ -27,9 +27,9 @@ So Episode #2 is about choosing one.
 There are really two ways to work through the Academy, and they optimize for different things.
 ```mermaid
 flowchart TD
-   Start([146 labs · 31 categories · 3 difficulties]) --> Choice{Which order?}
+   Start([146 labs, 31 categories, 3 difficulties]) --> Choice{Which order?}
    Choice -->|Breadth-first| BF[All Apprentice labs<br/>across all categories]
-   Choice -->|Depth-first| DF[One category end-to-end<br/>Apprentice → Practitioner → Expert]
+   Choice -->|Depth-first| DF[One category end-to-end<br/>Apprentice to Practitioner to Expert]
    BF --> BFpro[Pro: touch every bug class early<br/>Pro: broad pattern recognition<br/>Con: no deep intuition in any one area]
    DF --> DFpro[Pro: deep mastery per category<br/>Pro: momentum from finishing things<br/>Con: weeks before seeing some bug classes]
    BFpro --> Hybrid[Hybrid: breadth-first for Apprentice<br/>depth-first from Practitioner onward]
