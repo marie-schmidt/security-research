@@ -13,6 +13,6 @@ mermaid: false
 image:
   path: ""
   alt: ""
-hidden: true
+hidden: false
 ---
 

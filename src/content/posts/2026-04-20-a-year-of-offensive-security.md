@@ -1,5 +1,5 @@
 ---
-title: A Year of Offensive Security
+title: "Episode #1: A Year of Offensive Security"
 author: marie
 date: 2026-04-20T00:00:00-07:00
 categories: [Meta]
@@ -16,7 +16,7 @@ image:
 hidden: false
 ---
 
-I've spent most of my career on the defensive side of security — cloud architecture, infrastructure as code, secure-by-design reviews, threat modelling, compliance mappings. The kind of work that keeps systems from being built on sand. I enjoy it and I'm not leaving it behind. But there's a gap between knowing how systems should be protected and knowing how they actually get broken, and I've wanted to close that gap for a long time.
+I’ve spent most of my career on the defensive side of security: cloud security architecture, secure-by-design reviews, threat modelling, identity and access management, and governance, risk and compliance. The kind of work that keeps systems from being built on sand. I enjoy it and I’m not leaving it behind. But there’s a gap between knowing how systems should be protected and knowing how they actually get broken, and I’ve wanted to close that gap for a long time.
 
 So this year, I’m closing it. And I'm planning to document it.
 
