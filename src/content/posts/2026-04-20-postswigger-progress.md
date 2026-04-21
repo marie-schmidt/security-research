@@ -2,7 +2,7 @@
 title: PortSwigger Progress
 author: marie
 date: 2026-04-20T00:00:00-07:00
-categories: [Labs & CTFs, PortSwigger]
+categories: ["Labs & CTFs", PortSwigger]
 tags: [portswigger, roadmap]
 description: “Live tracker for my pass through the PortSwigger Web Security Academy — all 146 labs, current status, and links to writeups as they land.”
 pin: true
