@@ -26,6 +26,7 @@ Reference for how posts are organized on this blog. Categories form the hierarch
 -----
 ## Categories (hierarchical)
 ```
+Meta
 Web Security
 ├── Vulnerabilities
 ├── Methodology
