@@ -238,7 +238,9 @@ main {
   margin-bottom: 1.5rem;
 
   > table {
-    min-width: 100%;
+    width: 100%;
+    max-width: 100%;
+    table-layout: auto;
     overflow-x: auto;
     border-spacing: 0;
 
