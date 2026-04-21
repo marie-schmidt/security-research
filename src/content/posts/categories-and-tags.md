@@ -79,7 +79,7 @@ Tags describe what’s in a post regardless of category. A post in `Web Security
 #### **Mobile:**
 `ios`, `android`, `mobile`
 #### **Meta (use sparingly):**
-`owasp-top-10`, `cve`, `disclosure`, `writeup`, `tutorial`
+`owasp-top-10`, `cve`, `disclosure`, `writeup`, `tutorial`, `roadmap`
 #### **Source / context:**
 `hackthebox`, `portswigger`, `tryhackme`, `ctf`, `bug-bounty`
 -----

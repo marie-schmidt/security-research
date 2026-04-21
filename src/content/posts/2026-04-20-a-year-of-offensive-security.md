@@ -1,24 +1,24 @@
 ---
-## title: A Year of Offensive Security, In Public
+title: A Year of Offensive Security, In Public
 author: marie
 date: 2026-04-20T00:00:00-07:00
 categories: [Meta]
-tags: [learning-in-public, roadmap]
-description: “Twelve months of deep work in offensive security — the goals, the timeline, and how to follow along.”
+tags: [bug-bounty, roadmap]
+description: "Twelve months of deep work in offensive security — the goals, the timeline, and how to follow along."
 pin: false
 toc: true
 comments: true
 math: false
 mermaid: true
 image:
-path: “”
-alt: “”
+  path: ""
+  alt: ""
 hidden: false
 ---
 
-I’ve spent most of my career security-adjacent — cloud architecture, secure-by-design reviews, compliance mappings, the kind of work that keeps systems from being built on sand. Good work, and I still love it. But there’s a gap between designing secure systems and actually breaking them, and I’ve wanted to close that gap for a long time.
+I've spent most of my career on the defensive side of security — cloud architecture, infrastructure as code, secure-by-design reviews, threat modelling, compliance mappings. The kind of work that keeps systems from being built on sand. I enjoy it and I'm not leaving it behind. But there's a gap between knowing how systems should be protected and knowing how they actually get broken, and I've wanted to close that gap for a long time.
 
-So this year, I’m closing it — in public.
+So this year, I’m closing it. And I'm planning to document it.
 
 This post is the commitment. Over the next twelve months I’m going deep on offensive security: web application testing, bug bounty, lab work, and research. I’ll publish what I learn as I learn it. The point isn’t to look polished; it’s to leave a trail.
 
@@ -81,7 +81,7 @@ Knowing techniques is not the same as finding them fast. This phase is about pat
 
 - HTB writeups, web-focused first, then broader
 - My first bounty submissions — blow-by-blow of what I reported, what got accepted, what got marked duplicate, and what got rejected
-- A “what I got wrong” post after every N/A — those are the most useful ones to read
+- A "what I got wrong" post after every N/A — those are the most useful ones to read
 
 **Measurable target:** 15+ HTB machines with public writeups, three or more accepted bounty reports.
 
@@ -99,7 +99,7 @@ OSCP time. The cert stretches me past pure web into network and Active Directory
 
 ### Months 10–12 · Compound
 
-By the final quarter, the question shifts from “can I do this” to “how good can I get.” Sustained bug bounty rhythm, maybe OSWE prep, and deeper research.
+By the final quarter, the question shifts from "can I do this" to "how good can I get." Sustained bug bounty rhythm, maybe OSWE prep, and deeper research.
 
 **What you’ll see published here**
 
