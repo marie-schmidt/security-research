@@ -1,5 +1,5 @@
 ---
-title: A Year of Offensive Security, In Public
+title: A Year of Offensive Security
 author: marie
 date: 2026-04-20T00:00:00-07:00
 categories: [Meta]
