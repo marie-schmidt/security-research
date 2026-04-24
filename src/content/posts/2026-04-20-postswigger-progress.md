@@ -4,7 +4,7 @@ author: marie
 date: 2026-04-22T00:00:00-07:00
 categories: ["Labs & CTFs", PortSwigger]
 tags: [portswigger, roadmap]
-description: "Live tracker for my pass through the PortSwigger Web Security Academy — all 146 labs, current status, and links to writeups as they land."
+description: "Live tracker for my pass through the PortSwigger Web Security Academy — all 152 labs, current status, and links to writeups as they land."
 pin: true
 toc: true
 comments: true
@@ -22,7 +22,7 @@ This page updates as I go. Writeup links fill in progressively — not every lab
 
 ## Legend
 |Symbol|Meaning           |
-|:----:|------------------|
+|------|------------------|
 |✅     |Pwned             |
 |🟡     |In progress       |
 |⬜     |Not started       |
@@ -32,18 +32,18 @@ This page updates as I go. Writeup links fill in progressively — not every lab
 ## Overall progress
 |Difficulty  |Labs   |Done |%     |
 |------------|------:|----:|-----:|
-|Apprentice  |34     |0    |0%    |
-|Practitioner|94     |0    |0%    |
-|Expert      |18     |0    |0%    |
-|**Total**   |**146**|**0**|**0%**|
+|Apprentice  |36     |0    |0%    |
+|Practitioner|97     |0    |0%    |
+|Expert      |19     |0    |0%    |
+|**Total**   |**152**|**0**|**0%**|
 
 -----
 
 ## 1. SQL Injection — 0 / 18
 |Lab                                                                                                                                                                                                           |Status|Writeup|
 |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----:|:-----:|
-|[SQL injection in WHERE clause allowing retrieval of hidden data](https://portswigger.net/web-security/sql-injection/lab-retrieve-hidden-data)                                                                |⬜     |—      |
-|[SQL injection allowing login bypass](https://portswigger.net/web-security/sql-injection/lab-login-bypass)                                                                                                    |⬜     |—      |
+|[SQL injection vulnerability in WHERE clause allowing retrieval of hidden data](https://portswigger.net/web-security/sql-injection/lab-retrieve-hidden-data)                                                                |⬜     |—      |
+|[SQL injection vulnerability allowing login bypass](https://portswigger.net/web-security/sql-injection/lab-login-bypass)                                                                                                    |⬜     |—      |
 |[SQL injection attack, querying the database type and version on Oracle](https://portswigger.net/web-security/sql-injection/examining-the-database/lab-querying-database-version-oracle)                      |⬜     |—      |
 |[SQL injection attack, querying the database type and version on MySQL and Microsoft](https://portswigger.net/web-security/sql-injection/examining-the-database/lab-querying-database-version-mysql-microsoft)|⬜     |—      |
 |[SQL injection attack, listing the database contents on non-Oracle databases](https://portswigger.net/web-security/sql-injection/examining-the-database/lab-listing-database-contents-non-oracle)             |⬜     |—      |
@@ -162,7 +162,7 @@ This page updates as I go. Writeup links fill in progressively — not every lab
 |[Blind SSRF with Shellshock exploitation](https://portswigger.net/web-security/ssrf/blind/lab-shellshock-exploitation)                   |⬜     |—      |
 |[SSRF with whitelist-based input filter](https://portswigger.net/web-security/ssrf/lab-ssrf-with-whitelist-filter)                    |⬜     |—      |
 
-## 9. HTTP Request Smuggling — 0 / 21
+## 9. HTTP Request Smuggling — 0 / 22
 |Lab                                                                                         |Status|Writeup|
 |--------------------------------------------------------------------------------------------|:----:|:-----:|
 |[HTTP request smuggling, confirming a CL.TE vulnerability via differential responses](https://portswigger.net/web-security/request-smuggling/finding/lab-confirming-cl-te-via-differential-responses)         |⬜     |—      |
@@ -176,6 +176,7 @@ This page updates as I go. Writeup links fill in progressively — not every lab
 |[H2.CL request smuggling](https://portswigger.net/web-security/request-smuggling/advanced/lab-request-smuggling-h2-cl-request-smuggling)                                                                     |⬜     |—      |
 |[HTTP/2 request smuggling via CRLF injection](https://portswigger.net/web-security/request-smuggling/advanced/lab-request-smuggling-h2-request-smuggling-via-crlf-injection)                                                 |⬜     |—      |
 |[HTTP/2 request splitting via CRLF injection](https://portswigger.net/web-security/request-smuggling/advanced/lab-request-smuggling-h2-request-splitting-via-crlf-injection)                                                 |⬜     |—      |
+|[0.CL request smuggling](https://portswigger.net/web-security/request-smuggling/advanced/lab-request-smuggling-0cl-request-smuggling)                                                                      |⬜     |—      |
 |[CL.0 request smuggling](https://portswigger.net/web-security/request-smuggling/browser/cl-0/lab-cl-0-request-smuggling)                                                                      |⬜     |—      |
 |[HTTP request smuggling, basic CL.TE vulnerability](https://portswigger.net/web-security/request-smuggling/lab-basic-cl-te)                                           |⬜     |—      |
 |[HTTP request smuggling, basic TE.CL vulnerability](https://portswigger.net/web-security/request-smuggling/lab-basic-te-cl)                                           |⬜     |—      |
@@ -200,7 +201,7 @@ This page updates as I go. Writeup links fill in progressively — not every lab
 |Lab                                                                                 |Status|Writeup|
 |------------------------------------------------------------------------------------|:----:|:-----:|
 |[Basic server-side template injection](https://portswigger.net/web-security/server-side-template-injection/exploiting/lab-server-side-template-injection-basic)                                                |⬜     |—      |
-|[Server-side template injection (code context)](https://portswigger.net/web-security/server-side-template-injection/exploiting/lab-server-side-template-injection-basic-code-context)                                       |⬜     |—      |
+|[Basic server-side template injection (code context)](https://portswigger.net/web-security/server-side-template-injection/exploiting/lab-server-side-template-injection-basic-code-context)                                       |⬜     |—      |
 |[Server-side template injection using documentation](https://portswigger.net/web-security/server-side-template-injection/exploiting/lab-server-side-template-injection-using-documentation)                                  |⬜     |—      |
 |[Server-side template injection in an unknown language with a documented exploit](https://portswigger.net/web-security/server-side-template-injection/exploiting/lab-server-side-template-injection-in-an-unknown-language-with-a-documented-exploit)     |⬜     |—      |
 |[Server-side template injection with information disclosure via user-supplied objects](https://portswigger.net/web-security/server-side-template-injection/exploiting/lab-server-side-template-injection-with-information-disclosure-via-user-supplied-objects)|⬜     |—      |
@@ -299,7 +300,7 @@ This page updates as I go. Writeup links fill in progressively — not every lab
 |[Authentication bypass via information disclosure](https://portswigger.net/web-security/information-disclosure/exploiting/lab-infoleak-authentication-bypass) |⬜     |—      |
 |[Information disclosure in version control history](https://portswigger.net/web-security/information-disclosure/exploiting/lab-infoleak-in-version-control-history)|⬜     |—      |
 
-## 19. Business Logic — 0 / 11
+## 19. Business Logic — 0 / 12
 |Lab                                                                |Status|Writeup|
 |-------------------------------------------------------------------|:----:|:-----:|
 |[Excessive trust in client-side controls](https://portswigger.net/web-security/logic-flaws/examples/lab-logic-flaws-excessive-trust-in-client-side-controls)                            |⬜     |—      |
@@ -312,6 +313,7 @@ This page updates as I go. Writeup links fill in progressively — not every lab
 |[Insufficient workflow validation](https://portswigger.net/web-security/logic-flaws/examples/lab-logic-flaws-insufficient-workflow-validation)                                   |⬜     |—      |
 |[Authentication bypass via flawed state machine](https://portswigger.net/web-security/logic-flaws/examples/lab-logic-flaws-authentication-bypass-via-flawed-state-machine)                     |⬜     |—      |
 |[Infinite money logic flaw](https://portswigger.net/web-security/logic-flaws/examples/lab-logic-flaws-infinite-money)                                          |⬜     |—      |
+|[Authentication bypass via encryption oracle](https://portswigger.net/web-security/logic-flaws/examples/lab-logic-flaws-authentication-bypass-via-encryption-oracle)|⬜     |—      |
 |[Bypassing access controls using email address parsing discrepancies](https://portswigger.net/web-security/logic-flaws/examples/lab-logic-flaws-bypassing-access-controls-using-email-address-parsing-discrepancies)|⬜     |—      |
 
 ## 20. HTTP Host Header Attacks — 0 / 7
@@ -414,13 +416,17 @@ This page updates as I go. Writeup links fill in progressively — not every lab
 |[Exploiting a mass assignment vulnerability](https://portswigger.net/web-security/api-testing/lab-exploiting-mass-assignment-vulnerability)                  |⬜     |—      |
 |[Exploiting server-side parameter pollution in a REST URL](https://portswigger.net/web-security/api-testing/server-side-parameter-pollution/lab-exploiting-server-side-parameter-pollution-in-rest-url)    |⬜     |—      |
 
-## 30. Web LLM Attacks — 0 / 4
+## 30. Web LLM Attacks — 0 / 8
 |Lab                                        |Status|Writeup|
 |-------------------------------------------|:----:|:-----:|
 |[Exploiting LLM APIs with excessive agency](https://portswigger.net/web-security/llm-attacks/lab-exploiting-llm-apis-with-excessive-agency)  |⬜     |—      |
 |[Exploiting vulnerabilities in LLM APIs](https://portswigger.net/web-security/llm-attacks/lab-exploiting-vulnerabilities-in-llm-apis)     |⬜     |—      |
 |[Indirect prompt injection](https://portswigger.net/web-security/llm-attacks/lab-indirect-prompt-injection)                  |⬜     |—      |
 |[Exploiting insecure output handling in LLMs](https://portswigger.net/web-security/llm-attacks/lab-exploiting-insecure-output-handling-in-llms)|⬜     |—      |
+|[Exploiting AI agents to perform destructive actions](https://portswigger.net/web-security/llm-attacks/ai-powered-scanner-vulnerabilities/lab-indirect-prompt-injection-via-ai-powered-scan)|⬜     |—      |
+|[Exploiting AI agents to exfiltrate sensitive information](https://portswigger.net/web-security/llm-attacks/ai-powered-scanner-vulnerabilities/lab-sensitive-information-exfiltration)|⬜     |—      |
+|[Exploiting AI agents to trigger secondary vulnerabilities](https://portswigger.net/web-security/llm-attacks/ai-powered-scanner-vulnerabilities/lab-exploiting-target-website-vulnerabilities-to-bypass-restrictions)|⬜     |—      |
+|[Bypassing AI scanner defenses to exfiltrate sensitive information](https://portswigger.net/web-security/llm-attacks/ai-powered-scanner-vulnerabilities/lab-bypassing-ai-scanner-defenses-to-exfiltrate-sensitive-information)|⬜     |—      |
 
 ## 31. Web Cache Deception — 0 / 5
 |Lab                                                           |Status|Writeup|
