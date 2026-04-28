@@ -4,7 +4,7 @@ author: marie
 date: 2026-04-22T00:00:00-07:00
 categories: ["Labs & CTFs", PortSwigger]
 tags: [portswigger, roadmap]
-description: "Live tracker for my pass through the PortSwigger Web Security Academy — all 152 labs, current status, and links to writeups as they land."
+description: "Live tracker for my pass through the PortSwigger Web Security Academy — current status and links to writeups as they land."
 pin: true
 toc: true
 comments: true
@@ -16,7 +16,7 @@ image:
 hidden: false
 ---
 
-Live tracker for my pass through the [PortSwigger Web Security Academy](https://portswigger.net/web-security). Lab ordering follows [onyxwizard's roadmap](https://github.com/onyxwizard/portswigger-academy), and the reasoning behind that choice is in [Episode #2](/posts/episode-2-picking-a-path-through-portswigger-labs/).
+Live tracker for my pass through the [PortSwigger Web Security Academy](https://portswigger.net/web-security). Lab ordering follows [onyxwizard's roadmap](https://github.com/onyxwizard/portswigger-academy), and the reasoning behind that choice is in [Episode #2](/posts/picking-a-path-through-portswigger-labs/).
 
 This page updates as I go. Writeup links fill in progressively — not every lab gets one (the trivial Apprentice ones often don't), but anything that taught me something non-obvious will.
 
