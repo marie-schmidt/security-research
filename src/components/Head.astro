@@ -258,6 +258,12 @@ const socialImage = getImageUrl(pageImage);
           max-width: 100%;
           height: auto;
         }
+
+        /* Left-align multi-line text inside flowchart nodes */
+        pre.mermaid[data-processed="true"] .nodeLabel,
+        pre.mermaid[data-processed="true"] foreignObject div {
+          text-align: left;
+        }
       </style>
       <script is:inline src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
     </>

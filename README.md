@@ -7,7 +7,7 @@ Personal blog documenting a year-long deep dive into offensive security — web 
 ## What's here
 
 - Blog posts covering PortSwigger Web Security Academy labs, HTB writeups, bug bounty reports, and tooling
-- A live [PortSwigger progress tracker](https://marieschmidt.me/posts/postswigger-progress/) across all 146 labs
+- A live [PortSwigger progress tracker](https://marieschmidt.me/posts/postswigger-progress/) across all 152 labs
 - Research notes, post-mortems, and lessons learned along the way
 
 ## Tech stack
