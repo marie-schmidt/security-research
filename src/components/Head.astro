@@ -409,8 +409,15 @@ const socialImage = getImageUrl(pageImage);
               // Get code from hidden code element (persists across theme changes)
               code = codeElement.textContent || '';
             } else if (!isProcessed) {
-              // First time rendering - get from textContent
-              code = block.textContent || '';
+              // First time rendering - use innerHTML so HTML tags like <br/> in
+              // node labels survive (textContent would collapse them, joining words),
+              // then decode entities so arrows like --> aren't escaped to --&gt;
+              code = (block.innerHTML || '')
+                .replace(/&lt;/g, '<')
+                .replace(/&gt;/g, '>')
+                .replace(/&quot;/g, '"')
+                .replace(/&#39;/g, "'")
+                .replace(/&amp;/g, '&');
             } else {
               // Already processed but no stored code - skip this block
               console.warn('[Mermaid] Block already processed but no original code stored, skipping');
