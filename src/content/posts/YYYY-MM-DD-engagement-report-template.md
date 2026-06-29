@@ -2,8 +2,12 @@
 title: "Engagement Report — Target / Box Name"
 author: marie
 date: 2026-04-20T00:00:00-07:00
-categories: ["Writeups", "Engagements"]
-tags: [pentest, kill-chain, ]
+# Default: a Hack The Box machine. Swap PortSwigger for the right second
+# level (Hack The Box / CTF). Don't tag `hackthebox` while it's the category.
+categories: ["Labs & CTFs", "Hack The Box"]
+# No fixed tags — a box chains multiple bug classes. Tag the classes you
+# actually exploited + key tools (e.g. nmap). 3–6 total.
+tags: [ ]
 description: ""
 pin: false
 toc: true

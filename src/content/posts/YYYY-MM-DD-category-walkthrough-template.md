@@ -2,8 +2,12 @@
 title: "SQL Injection — Full PortSwigger Walkthrough"
 author: marie
 date: 2026-04-20T00:00:00-07:00
-categories: ["Writeups", "SQL Injection"]
-tags: [portswigger, sql-injection, ]
+# Default: a full PortSwigger category. If filed under Web Security >
+# Vulnerabilities instead, ADD the `portswigger` source tag.
+categories: ["Labs & CTFs", "PortSwigger"]
+# Required: the one vuln-class tag for this category (here `sqli`).
+# `burp-suite` is a near-certain default. 3–6 tags total.
+tags: [sqli, burp-suite, ]
 description: "Every PortSwigger SQL injection lab in one place, grouped by technique — payloads, the one insight per lab, and what's worth a deeper dive."
 pin: false
 toc: true

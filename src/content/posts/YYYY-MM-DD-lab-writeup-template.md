@@ -2,8 +2,13 @@
 title: "Vulnerability Name — Affected Component"
 author: marie
 date: 2026-04-20T00:00:00-07:00
-categories: ["Writeups", ""]
-tags: [portswigger, ]
+# Default: a single PortSwigger lab. If you instead file this under
+# Web Security > Writeups, ADD the `portswigger` source tag (it's no
+# longer a category then). Never tag `portswigger` while this category is set.
+categories: ["Labs & CTFs", "PortSwigger"]
+# Required: exactly one vuln-class tag (replace `sqli`). `burp-suite` is a
+# near-certain default. Add 1–4 more topic tags (3–6 total).
+tags: [sqli, burp-suite, ]
 description: ""
 pin: false
 toc: true
