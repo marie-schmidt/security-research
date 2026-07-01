@@ -34,11 +34,9 @@ Within that order, the rule is one topic at a time, end to end, Apprentice throu
 
 ```mermaid
 flowchart TD
-   Start([152 labs, 31 categories, 3 difficulties]) --> Order([Follow PortSwigger's recommended order])
-   Order --> SS[1. Server-side<br/>SQL injection first, then the rest]
-   SS --> CS[2. Client-side<br/>XSS, CSRF, CORS, Clickjacking, DOM, WebSockets]
-   CS --> Adv[3. Advanced topics<br/>Deserialization, SSTI, JWT, smuggling, OAuth, etc.]
-   Order --> Rule["<b style='color:#2ea043'>One topic at a time</b><br/>Apprentice to Practitioner to Expert<br/>finish before the next one starts"]
+   Start([152 labs, 31 categories, 3 difficulties]) --> SS["<b>1. Server-side</b><br/>SQL injection<br/>Authentication<br/>Path traversal<br/>Command injection<br/>Business logic vulnerabilities<br/>Information disclosure<br/>Access control<br/>File upload vulnerabilities<br/>Race conditions<br/>Server-side request forgery (SSRF)<br/>XXE injection<br/>NoSQL injection<br/>API testing"]
+   SS --> CS["<b>2. Client-side</b><br/>Cross-site scripting (XSS)<br/>Cross-site request forgery (CSRF)<br/>Cross-origin resource sharing (CORS)<br/>Clickjacking<br/>DOM-based vulnerabilities<br/>WebSockets"]
+   CS --> Adv["<b>3. Advanced topics</b><br/>Insecure deserialization<br/>Web LLM attacks<br/>GraphQL API vulnerabilities<br/>Server-side template injection<br/>Web cache poisoning<br/>HTTP Host header attacks<br/>HTTP request smuggling<br/>OAuth authentication<br/>JWT attacks<br/>Prototype pollution<br/>Essential skills<br/>Web cache deception"]
 ```
 
 ## Why this order
