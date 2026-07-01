@@ -34,9 +34,9 @@ Within that order, the rule is one topic at a time, end to end, Apprentice throu
 
 ```mermaid
 flowchart TD
-   Start([152 labs, 31 categories, 3 difficulties]) --> SS["<b>1. Server-side</b><br/>SQL injection<br/>Authentication<br/>Path traversal<br/>Command injection<br/>Business logic vulnerabilities<br/>Information disclosure<br/>Access control<br/>File upload vulnerabilities<br/>Race conditions<br/>Server-side request forgery (SSRF)<br/>XXE injection<br/>NoSQL injection<br/>API testing"]
-   SS --> CS["<b>2. Client-side</b><br/>Cross-site scripting (XSS)<br/>Cross-site request forgery (CSRF)<br/>Cross-origin resource sharing (CORS)<br/>Clickjacking<br/>DOM-based vulnerabilities<br/>WebSockets"]
-   CS --> Adv["<b>3. Advanced topics</b><br/>Insecure deserialization<br/>Web LLM attacks<br/>GraphQL API vulnerabilities<br/>Server-side template injection<br/>Web cache poisoning<br/>HTTP Host header attacks<br/>HTTP request smuggling<br/>OAuth authentication<br/>JWT attacks<br/>Prototype pollution<br/>Essential skills<br/>Web cache deception"]
+   Start([152 labs, 31 categories, 3 difficulties]) --> SS["<b>1. Server-side</b><br/>SQL injection, Authentication, Path traversal, Command injection, Business logic vulnerabilities, Information disclosure, Access control, File upload vulnerabilities, Race conditions, Server-side request forgery (SSRF), XXE injection, NoSQL injection, API testing"]
+   SS --> CS["<b>2. Client-side</b><br/>Cross-site scripting (XSS), Cross-site request forgery (CSRF), Cross-origin resource sharing (CORS), Clickjacking, DOM-based vulnerabilities, WebSockets"]
+   CS --> Adv["<b>3. Advanced topics</b><br/>Insecure deserialization, Web LLM attacks, GraphQL API vulnerabilities, Server-side template injection, Web cache poisoning, HTTP Host header attacks, HTTP request smuggling, OAuth authentication, JWT attacks, Prototype pollution, Essential skills, Web cache deception"]
 ```
 
 ## Why this order
