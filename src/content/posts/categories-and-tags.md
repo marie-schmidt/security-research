@@ -32,9 +32,9 @@ Web Security
 ├── Methodology
 └── Writeups
 Cloud Security
-├── Azure
-├── AWS
-└── IaC
+├── IaC
+├── Identity & Access
+└── Posture & Config
 Tooling
 ├── Burp Extensions
 ├── Nuclei Templates
@@ -43,6 +43,10 @@ Labs & CTFs
 ├── Hack The Box
 ├── PortSwigger
 └── CTF
+Cheat Sheets
+├── Web Security
+├── Cloud Security
+└── Tooling
 Bug Bounty
 ├── Disclosed Reports
 └── Methodology
@@ -52,9 +56,10 @@ Bug Bounty
 - *Vulnerabilities* — bug class explainers (e.g. “SSRF deep dive,” “Understanding prototype pollution”)
 - *Methodology* — how-to posts on testing approach, recon, reporting
 - *Writeups* — specific targets (labs, bounty targets, research)
-**Cloud Security** leverages professional depth in Azure. Most pure-pentest bloggers skip cloud; owning this niche is a differentiator.
+**Cloud Security** is the sibling subject to Web Security and the blog's key differentiator (most pure-pentest blogs skip cloud). Split by **concept**, not vendor — `IaC`, `Identity & Access`, `Posture & Config` — so thin content doesn't fragment across clouds and doesn't date as vendors rename services. The vendor is a *tag* (`azure`, `aws`), which also avoids duplicating the category in a tag.
 **Tooling** is the most recruiter-visible category. A hiring manager scanning the blog will click here first. Keep it separate even when it starts empty.
 **Labs & CTFs** is where most early volume will live. Keeping it separate from Web Security signals these are learning artifacts rather than original research — which protects credibility.
+**Cheat Sheets** is a *content type*, not a subject — the same logic as Labs. A cheat sheet is a dense reference artifact, not original research, so it stays out of `Web Security > Vulnerabilities` to protect that flagship category's credibility. Sub-categorize by domain (`Web Security`, `Cloud Security`, `Tooling`); a post lives in exactly one, e.g. a SQLi sheet is `Cheat Sheets > Web Security`. Don't also tag it `cheat-sheet` — the category already says that.
 **Bug Bounty** stays distinct because it has its own methodology and because recruiters specifically look for it (it is a listed preferred qualification for most offensive-security roles).
 ### Categories to skip
 - **Certifications** — cert study notes belong under Labs; one-off pass announcements don’t need a category.
@@ -79,10 +84,10 @@ Tags describe what’s in a post regardless of category. A post in `Web Security
 #### **Mobile:**
 `ios`, `android`, `mobile`
 #### **Meta (use sparingly):**
-`owasp-top-10`, `cve`, `disclosure`, `writeup`, `tutorial`, `roadmap`, `cheat-sheet`
-> **`cheat-sheet` vs `tutorial`** — `cheat-sheet` is a dense reference (tables, payloads, lookups) you scan mid-task. `tutorial` is step-by-step teaching you read start to finish. Pick one; don't tag both.
+`owasp-top-10`, `cve`, `disclosure`, `writeup`, `tutorial`, `roadmap`
 #### **Source / context:**
 `hackthebox`, `portswigger`, `tryhackme`, `ctf`, `bug-bounty`
+
 -----
 ## Examples
 ### SSRF bug found via bug bounty in an Azure-hosted app
@@ -95,12 +100,13 @@ Tags describe what’s in a post regardless of category. A post in `Web Security
 - **Category:** `Tooling > Burp Extensions`
 - **Tags:** `burp-suite`, `jwt`, `automation`
 ### Azure Landing Zone misconfiguration deep-dive
-- **Category:** `Cloud Security > Azure`
-- **Tags:** `iac`, `landing-zone`, `rbac`, `misconfiguration`
+- **Category:** `Cloud Security > IaC`
+- **Tags:** `azure`, `landing-zone`, `rbac`, `misconfiguration`
+- **Note:** Vendor lives in the tag (`azure`), not the category — the sub-category is the *concept* (`IaC`).
 ### SQL injection cheat sheet (dense reference page)
-- **Category:** `Web Security > Vulnerabilities`
-- **Tags:** `cheat-sheet`, `sqli`
-- **Note:** A cheat sheet is a *reference*, not a new category. File it under the subject's real home and tag it `cheat-sheet` so all sheets are filterable as a group. A tool sheet would be `Tooling > …` + `cheat-sheet`; a cloud sheet `Cloud Security > …` + `cheat-sheet`.
+- **Category:** `Cheat Sheets > Web Security`
+- **Tags:** `sqli`, `burp-suite`
+- **Note:** A cheat sheet is a content *type*, so it gets its own top-level category (like Labs), sub-categorized by domain — not filed under `Web Security > Vulnerabilities`. Don't tag `cheat-sheet`; the category already conveys it. A tool sheet would be `Cheat Sheets > Tooling`; a cloud sheet `Cheat Sheets > Cloud Security`.
 -----
 ## Maintenance
 - **Keep this file as the source of truth.** Before adding a tag to a post, check here first. If nothing fits, add the tag here *and* use it.

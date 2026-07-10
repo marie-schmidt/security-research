@@ -2,8 +2,8 @@
 title: "SQL Injection — Cheat Sheet"
 author: marie
 date: 2026-07-10T00:00:00-07:00
-categories: ["Web Security", "Vulnerabilities"]
-tags: [cheat-sheet, sqli, burp-suite]
+categories: ["Cheat Sheets", "Web Security"]
+tags: [sqli, burp-suite]
 description: "Condensed, high-density SQL injection reference — detection, injection contexts, UNION and blind techniques, and per-DBMS syntax (Oracle / MSSQL / PostgreSQL / MySQL) in scannable tables."
 pin: false
 toc: true

@@ -2,13 +2,13 @@
 title: "SQL Injection — Cheat Sheet"
 author: marie
 date: 2026-04-20T00:00:00-07:00
-# File under the subject's real home category, NOT a "Cheat Sheets" category —
-# `cheat-sheet` is a tag, not a category (see categories-and-tags.md). A vuln
-# sheet lives in Web Security > Vulnerabilities; a tool sheet in Tooling; etc.
-categories: ["Web Security", "Vulnerabilities"]
-# Required: `cheat-sheet` (the meta tag that groups all sheets) + the one
-# vuln-class/subject tag (here `sqli`). 3–6 tags total, all from the taxonomy.
-tags: [cheat-sheet, sqli, ]
+# `Cheat Sheets` is a top-level content-type category (like Labs), sub-categorized
+# by domain. Pick the sub that matches the subject: Web Security / Cloud Security
+# / Tooling. A post lives in exactly one path (see categories-and-tags.md).
+categories: ["Cheat Sheets", "Web Security"]
+# Tags: the subject/vuln-class tag(s) only. Do NOT tag `cheat-sheet` — the
+# category already conveys it. 3–6 tags total, all from the taxonomy.
+tags: [sqli, burp-suite, ]
 description: "Condensed, high-density SQL injection reference — payloads, DBMS syntax differences, and detection tricks in one scannable table."
 pin: false
 toc: true
