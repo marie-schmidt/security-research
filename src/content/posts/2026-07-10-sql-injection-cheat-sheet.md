@@ -16,9 +16,6 @@ image:
 hidden: false
 ---
 
-> **What this is** — A reference sheet, not a walkthrough. One scannable page to `Ctrl+F` mid-engagement. Tables carry the load; prose is the minimum needed to use them correctly.
-{: .prompt-info }
-
 ## What is SQL injection?
 
 SQLi lets an attacker interfere with the queries an application sends to its database — reading data belonging to other users, modifying or deleting data, and sometimes escalating to compromise the server or run denial-of-service. It happens wherever untrusted input is concatenated into a query instead of being passed as a parameter.
@@ -130,7 +127,7 @@ Input is stored safely on first request, then later read back and concatenated i
 | Untrusted data as **table/column name** or in `ORDER BY` | Can't parameterize — allow-list against known-good values, or redesign the logic. |
 | The parameterized string itself | Must be a hard-coded constant; never any variable data. Don't decide "trusted" case-by-case. |
 
-```java
+```javascript
 // Vulnerable: input concatenated into the query
 String query = "SELECT * FROM products WHERE category = '" + input + "'";
 
