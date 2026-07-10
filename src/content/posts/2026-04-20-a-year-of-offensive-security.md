@@ -67,7 +67,7 @@ The plan is simple: work through every lab on PortSwigger's Web Security Academy
 
 **What you'll see published here**
 
-- Weekly notes on whichever bug class I'm working through
+- Write-ups on whichever bug class I'm working through
 - Two or three deep-dive posts on the topics that hit hardest (past students point to race conditions, OAuth, and request smuggling as the cliffs)
 - A post-mortem after the BSCP exam — what the prep got right, what I'd do differently
 
