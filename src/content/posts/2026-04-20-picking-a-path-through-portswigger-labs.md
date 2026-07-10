@@ -45,11 +45,7 @@ PortSwigger built the curriculum and they know the prerequisite graph better tha
 The within-topic rule (finish a topic completely before the next) is the personal half. I already have a strong tendency to jump from one shiny new thing to the next, drop the last one half-done, and then convince myself it was a phase. So the rule is the opposite: one topic, all the way through, until it is actually finished. Real mastery per bug class, and the momentum of completing something, rather than a shallow tour I would quietly drift away from.
 - **Each topic:** end to end. Apprentice, then Practitioner, then Expert, in that order, in the same topic. No skipping ahead to the next topic because the current one got hard.
 - **Expert labs:** done as part of closing out the topic, not deferred to a someday-pile. Some are genuinely brutal, but leaving them behind defeats the point.
-- **Within a topic:** I follow [onyxwizard's lab ordering](https://github.com/onyxwizard/portswigger-academy) inside each topic, since their order groups related concepts cleanly and has been used successfully by others.
-
-## Credit where it's due
-The per-category ordering above comes from [onyxwizard/portswigger-academy](https://github.com/onyxwizard/portswigger-academy), a public lab tracker that lays out all 152 labs in a sensible learning order, tags them by difficulty, and includes emoji status markers for tracked progress. I'm not replicating it here; I'm following their ordering and linking to it.
-If you're starting PortSwigger yourself, fork that repo before you do anything else. Save yourself the decision fatigue.
+- **Within a topic:** I work through the labs in the order PortSwigger lists them on each topic page, top to bottom.
 
 ## The tracker
 The actual lab-by-lab tracker lives on its own page: [PortSwigger Progress](/posts/postswigger-progress/). That's the single source of truth, updated as I go, with status per lab and links to writeups as they land. This post stays a one-time writeup about the decision, so there's only ever one tracker to maintain.
