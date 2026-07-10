@@ -7,20 +7,17 @@ order: 4
 
 # Hi, I'm Marie 👋
 
-I work in cybersecurity — currently on the defensive/architecture side, pivoting toward offensive security and web application assessment.
+I work in cybersecurity, expanding toward offensive security and web application research.
 
 This site is my research notebook. I write up what I'm learning as I work through it: web application vulnerabilities, cloud attack surface, and the occasional tool I build to make testing faster. Everything here is independent work.
 
 ## What you'll find here
 - Web application security writeups
-- Cloud security notes (mostly Azure)
-- Custom tooling — Burp extensions, Nuclei templates, small utilities
+- Cloud security notes
 - Lab and CTF walkthroughs
 
 ## About me
-Based in Vancouver, BC. Background in security consulting and cloud architecture, currently working toward OSCP and BSCP. Fluent in English, French, German.
-
-Opinions are my own.
+Based in Vancouver, BC. Background in security consulting and cloud architecture, currently working toward OSCP and BSCP. Opinions are my own.
 
 ## Acknowledgments
 

@@ -79,7 +79,8 @@ Tags describe what’s in a post regardless of category. A post in `Web Security
 #### **Mobile:**
 `ios`, `android`, `mobile`
 #### **Meta (use sparingly):**
-`owasp-top-10`, `cve`, `disclosure`, `writeup`, `tutorial`, `roadmap`
+`owasp-top-10`, `cve`, `disclosure`, `writeup`, `tutorial`, `roadmap`, `cheat-sheet`
+> **`cheat-sheet` vs `tutorial`** — `cheat-sheet` is a dense reference (tables, payloads, lookups) you scan mid-task. `tutorial` is step-by-step teaching you read start to finish. Pick one; don't tag both.
 #### **Source / context:**
 `hackthebox`, `portswigger`, `tryhackme`, `ctf`, `bug-bounty`
 -----
@@ -96,6 +97,10 @@ Tags describe what’s in a post regardless of category. A post in `Web Security
 ### Azure Landing Zone misconfiguration deep-dive
 - **Category:** `Cloud Security > Azure`
 - **Tags:** `iac`, `landing-zone`, `rbac`, `misconfiguration`
+### SQL injection cheat sheet (dense reference page)
+- **Category:** `Web Security > Vulnerabilities`
+- **Tags:** `cheat-sheet`, `sqli`
+- **Note:** A cheat sheet is a *reference*, not a new category. File it under the subject's real home and tag it `cheat-sheet` so all sheets are filterable as a group. A tool sheet would be `Tooling > …` + `cheat-sheet`; a cloud sheet `Cloud Security > …` + `cheat-sheet`.
 -----
 ## Maintenance
 - **Keep this file as the source of truth.** Before adding a tag to a post, check here first. If nothing fits, add the tag here *and* use it.
