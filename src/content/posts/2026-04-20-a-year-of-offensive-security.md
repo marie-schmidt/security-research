@@ -36,27 +36,27 @@ This is a side project done around a full-time role I enjoy — evenings, weeken
 
 ```mermaid
 gantt
-   title Twelve-Month Offensive Security Plan
-   dateFormat  YYYY-MM-DD
-   axisFormat  %b %Y
+   title Twelve-Month Offensive Security Plan
+   dateFormat  YYYY-MM-DD
+   axisFormat  %b %Y
 
-   section Foundation
-   PortSwigger Web Security Academy  :f1, 2026-04-20, 90d
-   BSCP Exam                         :milestone, 2026-07-20, 0d
+   section Foundation
+   PortSwigger Web Security Academy  :f1, 2026-04-20, 90d
+   BSCP Exam                         :milestone, 2026-07-20, 0d
 
-   section Reps
-   Hack The Box + Writeups           :r1, 2026-07-20, 90d
-   First Bug Bounty Reports          :r2, 2026-08-20, 60d
+   section Reps
+   Hack The Box + Writeups           :r1, 2026-07-20, 90d
+   First Bug Bounty Reports          :r2, 2026-08-20, 60d
 
-   section Deep Work
-   OSCP Prep & Lab                   :d1, 2026-10-20, 90d
-   Original Research / CVE Hunt      :d2, 2026-10-20, 90d
-   OSCP Exam                         :milestone, 2027-01-20, 0d
+   section Deep Work
+   OSCP Prep & Lab                   :d1, 2026-10-20, 90d
+   Original Research / CVE Hunt      :d2, 2026-10-20, 90d
+   OSCP Exam                         :milestone, 2027-01-20, 0d
 
-   section Compound
-   Sustained Bug Bounty              :c1, 2027-01-20, 90d
-   Tooling + OSWE Prep               :c2, 2027-02-20, 60d
-   Year-End Retrospective            :milestone, 2027-04-20, 0d
+   section Compound
+   Sustained Bug Bounty              :c1, 2027-01-20, 90d
+   Tooling + OSWE Prep               :c2, 2027-02-20, 60d
+   Year-End Retrospective            :milestone, 2027-04-20, 0d
 ```
 
 ## The phases
@@ -126,41 +126,41 @@ A rough picture of the territory I'm trying to cover. Some of this I already kno
 
 ```mermaid
 mindmap
- root((Offensive Security))
-   Web App Security
-     OWASP Top 10
-     Auth and Session
-       JWT / OAuth
-       SAML
-     Business Logic
-     Access Control
-       IDOR
-       Auth Bypass
-     Injection
-       SQLi
-       XSS
-       SSTI
-     Advanced Classes
-       Request Smuggling
-       Prototype Pollution
-       Cache Poisoning
-       Deserialization
-   Tooling
-     Burp Suite
-     Nuclei
-     Custom Scripts
-     ffuf / sqlmap
-   Cloud Attack Surface
-     Azure
-     IaC Review
-     Metadata Services
-   Network and AD
-     Enumeration
-     Privilege Escalation
-     Lateral Movement
-   Mobile
-     Android / Frida
-     iOS
+ root((Offensive Security))
+   Web App Security
+     OWASP Top 10
+     Auth and Session
+       JWT / OAuth
+       SAML
+     Business Logic
+     Access Control
+       IDOR
+       Auth Bypass
+     Injection
+       SQLi
+       XSS
+       SSTI
+     Advanced Classes
+       Request Smuggling
+       Prototype Pollution
+       Cache Poisoning
+       Deserialization
+   Tooling
+     Burp Suite
+     Nuclei
+     Custom Scripts
+     ffuf / sqlmap
+   Cloud Attack Surface
+     Azure
+     IaC Review
+     Metadata Services
+   Network and AD
+     Enumeration
+     Privilege Escalation
+     Lateral Movement
+   Mobile
+     Android / Frida
+     iOS
 ```
 
 ## Ground rules I'm setting for myself
