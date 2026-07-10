@@ -127,7 +127,7 @@ Input is stored safely on first request, then later read back and concatenated i
 | Untrusted data as **table/column name** or in `ORDER BY` | Can't parameterize — allow-list against known-good values, or redesign the logic. |
 | The parameterized string itself | Must be a hard-coded constant; never any variable data. Don't decide "trusted" case-by-case. |
 
-```javascript
+```java
 // Vulnerable: input concatenated into the query
 String query = "SELECT * FROM products WHERE category = '" + input + "'";
 
