@@ -1,5 +1,5 @@
 ---
-title: "SQL Injection — Cheat Sheet"
+title: "SQL Injection (SQLi) Cheat Sheet"
 author: marie
 date: 2026-07-10T00:00:00-07:00
 categories: ["Cheat Sheets", "Web Security"]
@@ -20,7 +20,12 @@ hidden: false
 
 SQLi lets an attacker interfere with the queries an application sends to its database — reading data belonging to other users, modifying or deleting data, and sometimes escalating to compromise the server or run denial-of-service. It happens wherever untrusted input is concatenated into a query instead of being passed as a parameter.
 
-**Conventions below:** `--` = comment to end of line · `+` = URL-encoded space · `[T]`/`[C]` = target table/column · payloads shown pre-encoding unless noted · injection assumed inside a single-quoted string in a `WHERE` clause unless stated.
+**Conventions below:**
+- `--` = Comment to end of line
+- `+` = URL-encoded space
+- `[T]`/`[C]` = Target table/column
+- Payloads shown pre-encoding unless noted 
+- Injection assumed inside a single-quoted string in a `WHERE` clause unless stated.
 
 ## Detection — first moves
 
