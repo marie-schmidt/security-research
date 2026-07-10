@@ -41,22 +41,22 @@ gantt
    axisFormat  %b %Y
 
    section Foundation
-   PortSwigger Web Security Academy  :f1, 2026-04-20, 90d
-   BSCP Exam                         :milestone, 2026-07-20, 0d
+   PortSwigger Web Security Academy  :f1, 2026-07-01, 90d
+   BSCP Exam                         :milestone, 2026-10-01, 0d
 
    section Reps
-   Hack The Box + Writeups           :r1, 2026-07-20, 90d
-   First Bug Bounty Reports          :r2, 2026-08-20, 60d
+   Hack The Box + Writeups           :r1, 2026-10-01, 90d
+   First Bug Bounty Reports          :r2, 2026-11-01, 60d
 
    section Deep Work
-   OSCP Prep & Lab                   :d1, 2026-10-20, 90d
-   Original Research / CVE Hunt      :d2, 2026-10-20, 90d
-   OSCP Exam                         :milestone, 2027-01-20, 0d
+   OSCP Prep & Lab                   :d1, 2027-01-01, 90d
+   Original Research / CVE Hunt      :d2, 2027-01-01, 90d
+   OSCP Exam                         :milestone, 2027-04-01, 0d
 
    section Compound
-   Sustained Bug Bounty              :c1, 2027-01-20, 90d
-   Tooling + OSWE Prep               :c2, 2027-02-20, 60d
-   Year-End Retrospective            :milestone, 2027-04-20, 0d
+   Sustained Bug Bounty              :c1, 2027-04-01, 90d
+   Tooling + OSWE Prep               :c2, 2027-05-01, 60d
+   Year-End Retrospective            :milestone, 2027-07-01, 0d
 ```
 
 ## The phases
@@ -116,9 +116,7 @@ I want this to be verifiable, not just aspirational. All of these will stay publ
 - **This blog** — post count, categories, tag cloud
 - **GitHub** — [marie-schmidt](https://github.com/marie-schmidt) — tooling, extensions, contributions
 - **HackerOne & Bugcrowd** — profiles going live once my first report lands
-- **Certification status** — listed on the [About](/about) page, updated as each exam is passed (or failed — those count too)
-
-If this blog goes quiet for a month, the plan is slipping. Call it out in the comments.
+- **Certification status** — listed on the [About](/about) page, updated as each exam is passed
 
 ## The skill map
 
