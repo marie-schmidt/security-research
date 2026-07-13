@@ -1,5 +1,5 @@
 ---
-title: "[Cheat Sheet] SQL Injection (SQLi)"
+title: "Cheat Sheet: SQL Injection (SQLi)"
 author: marie
 date: 2026-07-10T00:00:00-07:00
 categories: ["Cheat Sheets", "Web Security"]

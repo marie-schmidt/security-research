@@ -1,7 +1,7 @@
 ---
 title: "Episode #1: A Year of Offensive Security"
 author: marie
-date: 2026-04-20T00:00:00-07:00
+date: 2026-07-02T00:00:00-07:00
 categories: [Meta]
 tags: [bug-bounty, roadmap]
 description: "Twelve months of deep work in offensive security — the goals, the timeline, and how to follow along."

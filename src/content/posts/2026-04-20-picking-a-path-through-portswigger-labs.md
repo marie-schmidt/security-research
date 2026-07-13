@@ -1,7 +1,7 @@
 ---
 title: "Episode #2: Picking a Path Through PortSwigger Labs"
 author: marie
-date: 2026-04-21T00:00:00-07:00
+date: 2026-07-04T00:00:00-07:00
 categories: ["Labs & CTFs", PortSwigger]
 tags: [portswigger, roadmap]
 description: "Starting the Foundation phase: figuring out what order to attack the PortSwigger web security labs when the platform itself doesn't give you one."
